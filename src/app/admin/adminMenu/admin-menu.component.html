@@ -1,0 +1,66 @@
+<div class="top-bar">
+    <!--<div class="top-bar-title">BPC Admin area</div>
+
+     <div class="top-bar-left">
+        <ul class="menu">
+            <li class="admin-menu"><a [routerLink]="['/admin/blog-admin']">Manage Blog</a></li>
+            <li class="admin-menu"><a [routerLink]="['/admin/menu-admin']">Manage Menu</a></li>
+            <li class="admin-menu"><a [routerLink]="['/admin/sub-menu-admin']">Manage Sub Menu</a></li>
+            <li class="admin-menu"><a href="#">Two</a></li>
+        </ul>
+    </div> -->
+    <div *ngIf="theUser" class="top-bar-right">
+        <ul class="menu">
+            <li class="admin-menu">
+                <a (click)="logout()">Logout</a>
+            </li>
+            <li class="admin-menu">
+                <a> {{theUser}} Logged in</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- <div class="btn-group">
+    <a class="btn btn-secondary" [routerLink]="['/admin/blog-admin']" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Blog</a>
+</div> -->
+<div class="btn-group">
+    <a class="btn btn-secondary" [routerLink]="['/admin/menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Menu</a>
+</div>
+<div class="btn-group">
+    <a class="btn btn-secondary" [routerLink]="['/admin/sub-menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Sub Menu</a>
+</div>
+<div class="btn-group">
+    <a class="btn btn-secondary" (click)="chooseMode('header')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Header</a>
+</div>
+<div class="btn-group">
+    <a class="btn btn-secondary" (click)="chooseMode('footer')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Footer</a>
+</div>
+
+<div class="container-fluid">
+    <div *ngIf="headerChoice">
+        <form>
+            <div class="row">
+                <div class="medium-12 columns">
+                    <h3>Edit {{headerChoice}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <label>Content
+                        <textarea rows="15" cols="100" [(ngModel)]="content" name="editContent" #psContent="ngModel"></textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="row align-center">
+                <div class="small-12 columns">
+                    <div class="expanded button-group">
+                        <button class="success button" type="button" (click)="updateMisc()">Update {{headerChoice}}</button>
+                        <button class="cancel button" type="button" (click)="headerChoice=''">Cancel Edit</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

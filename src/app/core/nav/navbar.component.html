@@ -1,0 +1,97 @@
+
+<!-- <div class="btn-group" *ngFor="let menu of menuSVC.topMenu">
+  <button *ngIf="menu.items?.length>0" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{menu.name}}
+  </button>
+  <button *ngIf="menu.items?.length<=0" type="button" class="btn" [routerLink]=" ['./', menu.name.replace(' ', '-')] " routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}" >
+      {{menu.name}}
+  </button>
+  <div *ngIf="menu.items?.length>0" class="dropdown-menu">
+     <div *ngFor="let subMenu of menu.items">
+      <a (click)="changeSubRoute(menu, subMenu)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        {{subMenu.name}}
+      </a>
+    </div> 
+  </div>
+</div>
+<div class="btn-group">
+    <button type="button" class="btn" [routerLink]=" ['./admin'] " routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        Admin
+    </button>
+</div> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown" [ngClass]="{active: menuSVC.currentMenu?.id === menu.id}" *ngFor="let menu of menuSVC.topMenu">
+          <a *ngIf="menu.items?.length<=0" class="nav-link" [ngClass]="{active: menuSVC.currentMenu?.id === menu.id}" (click)="changeRoute(menu)"  id="navbarDropdown" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">{{menu.name}}</a>
+          <a *ngIf="menu.items?.length>0" class="nav-link dropdown-toggle" href="#" [ngClass]="{active: menuSVC.currentMenu?.id === menu.id}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{menu.name}}
+          </a>
+          <div *ngIf="menu.items?.length>0" class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <a *ngFor="let subMenu of menu.items" (click)="changeSubRoute(menu, subMenu)" class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+                 {{subMenu.name}}
+               </a>
+          </div>
+        </li>
+        <li *ngIf="userSVC.loggedInUser" class="nav-item">
+          <a class="nav-link" (click)="adminRoute()" [routerLink]=" ['./admin'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Admin</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+<!-- <nav>
+    <a [routerLink]=" ['./'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Index
+    </a>
+    <a [routerLink]=" ['./home'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Home
+    </a>
+    <a [routerLink]=" ['./mission'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Mission
+    </a>
+    <a [routerLink]=" ['./mission/who i am'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Who i am
+  </a>
+  <a [routerLink]=" ['./contactus'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Contact Us
+  </a>
+  <a [routerLink]=" ['./contactus/email'] "
+  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+  Contact email
+</a>
+<a [routerLink]=" ['./detail'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Detail
+    </a>
+    <a [routerLink]=" ['./widget'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Widget
+    </a>
+    <a [routerLink]=" ['./barrel'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      Barrel
+    </a>
+    <a [routerLink]=" ['./about'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      About
+    </a>
+    <a [routerLink]=" ['./admin'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Admin
+  </a>
+</nav> -->
+
+
+

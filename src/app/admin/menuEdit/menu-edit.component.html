@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="small-12 medium-6 columns">
+            <h1>{{menuData.addMode?'Create a Menu':'Edit a Menu'}}</h1>
+        </div>
+    </div>
+    
+    <form>
+        <div class="row">
+            <div class="small-12 medium-6 columns">
+                <label>Menu Name
+                    <input type="text" [(ngModel)]="menu.name" name="name" required #navName="ngModel">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label>Menu Content
+                    <textarea rows="15" cols="100" [(ngModel)]="menu.content" name="content" required #psContent="ngModel"></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 medium-6 columns">
+                <label>Order
+                    <input type="number" [(ngModel)]="menu.order" name="order" required #navOrder="ngModel">
+                </label>
+            </div>
+            <div class="small-12 medium-6 columns">
+                <label>Enable
+                    <input type="radio" name="enable" [(ngModel)]="menu.enable" [value]="true"> True
+                    <input type="radio" name="enable" [(ngModel)]="menu.enable" [value]="false"> False
+                </label>
+            </div>
+        </div>
+        <div class="row align-center">
+            <div class="small-12 columns">
+                <div class="expanded button-group">
+                    <button class="success button" type="button" [disabled]="!navName.valid"
+                        (click)="updateMenu(menu)">Update Menu</button>
+                    <button class="cancel button" type="button" (click)="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+            
+    </form>
+</div>

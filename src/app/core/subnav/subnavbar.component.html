@@ -1,0 +1,9 @@
+subnav=========<br>
+<nav>
+    <span *ngFor="let menu of subNav">
+      <a (click)="changeRoute(menu)" >
+        {{menu.name}}
+      </a>
+    </span> 
+</nav>
+subnav=========<br>
