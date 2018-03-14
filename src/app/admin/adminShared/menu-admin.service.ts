@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
+import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 import { Menu } from '../../core/models/menu';
 
 @Injectable()
 
 export class MenuAdminService {
+    constructor(private db: AngularFireDatabase ) {
+    }
+
     createMenu(menu: Menu){
-        let dbRef = firebase.database().ref('menu/');
+        let dbRef = this.db.object('menu/').$ref;
         let newMenu = dbRef.push();
         newMenu.set ({
             name: menu.name,
@@ -15,13 +19,13 @@ export class MenuAdminService {
             id: newMenu.key
         });
 
-        let subMenuRef = firebase.database().ref('subMenu/');
+        let subMenuRef = this.db.object('subMenu/').$ref;
         let newSubMenu = subMenuRef.child(newMenu.key);
         newSubMenu.set ({
             name: menu.name,
         });
 
-        let contentRef = firebase.database().ref('content/');
+        let contentRef = this.db.object('content/').$ref;
         let content = contentRef.child(newMenu.key);
         if (menu.content) {
             content.set ({
@@ -36,7 +40,7 @@ export class MenuAdminService {
     }
 
     editMenu(menu: Menu) {        
-        let dbRef = firebase.database().ref('menu/').child(menu.id)
+        let dbRef = this.db.object('menu/').$ref.child(menu.id)
             .update({
                 name: menu.name,
                 order: menu.order,
@@ -48,13 +52,13 @@ export class MenuAdminService {
             }
         );
 
-        let subMenuRef = firebase.database().ref('subMenu/');
+        let subMenuRef = this.db.object('subMenu/').$ref;
         let newSubMenu = subMenuRef.child(menu.id);
         newSubMenu.update ({
             name: menu.name,
         });
 
-        let contentRef = firebase.database().ref('content/');
+        let contentRef = this.db.object('content/').$ref;
         let content = contentRef.child(menu.id);
         if (menu.content) {
             content.update ({
@@ -80,8 +84,8 @@ export class MenuAdminService {
     // created: FireBase.ServerValue.TIMESTAMP
 
     removeMenu(deleteMenu: Menu) {
-        let dbRef = firebase.database().ref('menu/').child(deleteMenu.id).remove();
-        let subMenuChildRef = firebase.database().ref('subMenu/').child(deleteMenu.id).child('items');
+        let dbRef = this.db.object('menu/').$ref.child(deleteMenu.id).remove();
+        let subMenuChildRef = this.db.object('subMenu/').$ref.child(deleteMenu.id).child('items');
         subMenuChildRef.once('value')
             .then((snapshot) => {
                 let tmp: string[] = [];
@@ -90,12 +94,12 @@ export class MenuAdminService {
                     tmp.push(childSnapshot.val());
                 })
                 let menuItems = Object.keys(tmp).map(key => tmp[key]);
-                menuItems.forEach(m=>firebase.database().ref('content/').child(m.id).remove());
+                menuItems.forEach(m=>this.db.object('content/').$ref.child(m.id).remove());
         });
         subMenuChildRef.remove();
-        let subMenuRef = firebase.database().ref('subMenu/').child(deleteMenu.id).remove();
+        let subMenuRef = this.db.object('subMenu/').$ref.child(deleteMenu.id).remove();
 
-        let contentRef = firebase.database().ref('content/').child(deleteMenu.id).remove();
+        let contentRef = this.db.object('content/').$ref.child(deleteMenu.id).remove();
 
         //alert('menu deleted');
         // let imageRef = firebase.storage().ref().child(`images/${deleteMenu.imgTitle}`)
@@ -108,7 +112,7 @@ export class MenuAdminService {
     }
 
     createSubMenu(parentId: string, menu: Menu){
-        let dbRef = firebase.database().ref('subMenu/').child(parentId).child('items');
+        let dbRef = this.db.object('subMenu/').$ref.child(parentId).child('items');
         let newMenu = dbRef.push();
         newMenu.set ({
             name: menu.name,
@@ -123,7 +127,7 @@ export class MenuAdminService {
         //     name: menu.name,
         // });
 
-        let contentRef = firebase.database().ref('content/');
+        let contentRef = this.db.object('content/').$ref;
         let content = contentRef.child(newMenu.key);
         content.update ({
             name: menu.name,
@@ -132,7 +136,7 @@ export class MenuAdminService {
     }
 
     editSubMenu(parentId: string, menu: Menu) {        
-        let dbRef = firebase.database().ref('subMenu/').child(parentId).child('items').child(menu.id)
+        let dbRef = this.db.object('subMenu/').$ref.child(parentId).child('items').child(menu.id)
         //let dbRef = firebase.database().ref('menu/').child(menu.id)
             .update({
                 name: menu.name,
@@ -151,7 +155,7 @@ export class MenuAdminService {
         //     name: menu.name,
         // });
 
-        let contentRef = firebase.database().ref('content/').child(menu.id);
+        let contentRef = this.db.object('content/').$ref.child(menu.id);
         //let content = contentRef.child(menu.id);
         if (menu.content) {
             contentRef.update ({
@@ -175,12 +179,12 @@ export class MenuAdminService {
     }
 
     removeSubMenu(parentId: string, deleteMenu: Menu) {
-        let subMenuRef = firebase.database().ref('subMenu/').child(parentId).child('items').child(deleteMenu.id).remove();
-        let contentRef = firebase.database().ref('content/').child(deleteMenu.id).remove();
+        let subMenuRef = this.db.object('subMenu/').$ref.child(parentId).child('items').child(deleteMenu.id).remove();
+        let contentRef = this.db.object('content/').$ref.child(deleteMenu.id).remove();
     }
 
     editMisc(type: string, content: string) {        
-        let dbRef = firebase.database().ref('misc/' + type + '/')
+        let dbRef = this.db.object('misc/' + type + '/').$ref
             .update({
                 content: content
             }, function(err) {

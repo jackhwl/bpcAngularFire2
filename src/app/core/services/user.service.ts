@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-//import { firebaseConfig } from '../../environment';
 import * as firebase from 'firebase';
-// // for auth    
- import {AngularFireAuth} from 'angularfire2/auth';
-// // for database
+import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 @Injectable()
@@ -14,7 +11,6 @@ export class UserService implements CanActivate {
     authUser: any;
 
     constructor(private router: Router, private db: AngularFireDatabase, private au: AngularFireAuth ) {
-        //firebase.initializeApp(firebaseConfig);
         //firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
     }
 
@@ -31,7 +27,7 @@ export class UserService implements CanActivate {
     }
 
     register(email: string, password: string){
-        // firebase.auth().createUserWithEmailAndPassword(email, password)
+        // this.au.auth.createUserWithEmailAndPassword(email, password)
         //     .catch(function(error) {
         //         alert(`${error.message} Please Try Again!`);
         //     });
@@ -50,6 +46,7 @@ export class UserService implements CanActivate {
     }
 
     login(loginEmail: string, loginPassword: string){
+        let vm = this;
         this.au.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
           // Existing and future Auth states are now persisted in the current
@@ -57,7 +54,7 @@ export class UserService implements CanActivate {
           // if a user forgets to sign out.
           // ...
           // New sign-in will be persisted with session persistence.
-          this.au.auth.signInWithEmailAndPassword(loginEmail, loginPassword)
+          vm.au.auth.signInWithEmailAndPassword(loginEmail, loginPassword)
           .catch(function(error) {
               alert('${error.message} Unable to login. Try Again!');
           });
