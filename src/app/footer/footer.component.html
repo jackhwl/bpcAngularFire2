@@ -1,1 +1,1 @@
-<footer class="column text-justified" [innerHTML]="sanitizer.bypassSecurityTrustHtml(menuSVC.misc?.footer?.content || '')"></footer>
+<footer class="column text-justified" *ngIf="misc$ | async as misc" [innerHTML]="sanitizer.bypassSecurityTrustHtml(misc?.footer?.content || '')"></footer>

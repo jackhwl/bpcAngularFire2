@@ -6,6 +6,7 @@ import { Menu, Misc } from '../models';
 // import {AngularFireAuthModule} from 'angularfire2/auth';
 // // for database
 import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 
 @Injectable()
 
@@ -14,8 +15,11 @@ export class MenuService {
     subMenu: Menu[];
     currentMenu: Menu;
     currentSubMenu: Menu;
-    misc: Misc;
+    content$: FirebaseObjectObservable<any>;
+    misc$: FirebaseObjectObservable<Misc>;
+
     constructor(private db: AngularFireDatabase ) {
+        this.misc$ = this.db.object('misc/');
     }
     getTopNav(routeMenu: string, routeSubMenu: string = null){
         if (!this.topMenu) {
@@ -82,11 +86,7 @@ export class MenuService {
     }
 
     getMisc() {
-        let contentRef = this.db.object('misc/').$ref;
-        contentRef.once('value')
-            .then((snapshot) => {
-                this.misc = snapshot.val();
-            });
+        return this.misc$;
     }
   }
 
