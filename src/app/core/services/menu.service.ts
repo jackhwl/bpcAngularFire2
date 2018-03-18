@@ -5,8 +5,8 @@ import { Menu, Misc } from '../models';
 // // for auth    
 // import {AngularFireAuthModule} from 'angularfire2/auth';
 // // for database
-import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import {AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
+//import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 
 @Injectable()
 
@@ -15,15 +15,21 @@ export class MenuService {
     subMenu: Menu[];
     currentMenu: Menu;
     currentSubMenu: Menu;
-    content$: FirebaseObjectObservable<any>;
+    content$: FirebaseObjectObservable<string>;
     misc$: FirebaseObjectObservable<Misc>;
+    subMenu$: FirebaseObjectObservable<Menu>;
+    menu$: FirebaseListObservable<Menu[]>;
 
     constructor(private db: AngularFireDatabase ) {
-        this.misc$ = this.db.object('misc/');
+        this.misc$ = this.db.object('misc');
+        this.content$ = this.db.object('content');
+        this.subMenu$ = this.db.object('subMenu');
+        this.menu$ = this.db.list('menu');
     }
     getTopNav(routeMenu: string, routeSubMenu: string = null){
         if (!this.topMenu) {
-            let dbRef = this.db.list('menu/').$ref.orderByChild('order');
+            //let dbRef = this.menu$.$ref.orderByChild('order');
+            let dbRef = this.db.list('menu', {query: {orderByChild: 'order'}}).$ref;
             dbRef.once('value')
                 .then((snapshot) => {
                     let tmp: string[] = [];
@@ -32,7 +38,7 @@ export class MenuService {
                         if (item.enable) tmp.push(childSnapshot.val());
                     })
                     this.topMenu = Object.keys(tmp).map(key => tmp[key]);
-                    console.log(routeMenu);
+                    //console.log(routeMenu);
                     if (routeMenu.toLowerCase() === 'admin') {
                         this.topMenu.forEach(m => {
                             this.getSubNav(m, null, false);
@@ -54,7 +60,8 @@ export class MenuService {
 
     getSubNav(menu: Menu, routeSubMenu: string = null, withContent: boolean = true) {
         if (!menu.items) {
-          let dbRef = this.db.object('subMenu/').$ref.child(menu.id).child('items').orderByChild('order');
+          let dbRef = this.subMenu$.$ref.child(menu.id).child('items').orderByChild('order');
+          //let dbRef = this.subMenu$.$ref.child(menu.id).child('items').orderByChild('order');
           dbRef.once('value')
               .then((snapshot) => {
                   let tmp: string[] = [];
@@ -76,7 +83,7 @@ export class MenuService {
 
     getContent(menu: Menu){
         if (menu && !menu.content) {
-            let contentRef = this.db.object('content/').$ref.child(menu.id);
+            let contentRef = this.content$.$ref.child(menu.id);
             contentRef.once('value')
                 .then((snapshot) => {
                     let contents = snapshot.val();

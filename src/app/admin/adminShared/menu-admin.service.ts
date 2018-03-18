@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 //import * as firebase from 'firebase';
-import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Menu } from '../../core/models/menu';
 
 @Injectable()
 
 export class MenuAdminService {
+    contents$: FirebaseListObservable<string[]>;
+    subMenu$: FirebaseObjectObservable<Menu>;
+
     constructor(private db: AngularFireDatabase ) {
+        this.subMenu$ = this.db.object('subMenu');
+        this.contents$ = this.db.list('content');
     }
 
     createMenu(menu: Menu){
@@ -94,12 +99,11 @@ export class MenuAdminService {
                     tmp.push(childSnapshot.val());
                 })
                 let menuItems = Object.keys(tmp).map(key => tmp[key]);
-                menuItems.forEach(m=>this.db.object('content/').$ref.child(m.id).remove());
+                menuItems.forEach(m=>this.contents$.remove(m.id));
         });
         subMenuChildRef.remove();
         let subMenuRef = this.db.object('subMenu/').$ref.child(deleteMenu.id).remove();
-
-        let contentRef = this.db.object('content/').$ref.child(deleteMenu.id).remove();
+        this.contents$.remove(deleteMenu.id);
 
         //alert('menu deleted');
         // let imageRef = firebase.storage().ref().child(`images/${deleteMenu.imgTitle}`)
@@ -136,7 +140,7 @@ export class MenuAdminService {
     }
 
     editSubMenu(parentId: string, menu: Menu) {        
-        let dbRef = this.db.object('subMenu/').$ref.child(parentId).child('items').child(menu.id)
+        let dbRef = this.subMenu$.$ref.child(parentId).child('items').child(menu.id)
         //let dbRef = firebase.database().ref('menu/').child(menu.id)
             .update({
                 name: menu.name,
@@ -180,7 +184,7 @@ export class MenuAdminService {
 
     removeSubMenu(parentId: string, deleteMenu: Menu) {
         let subMenuRef = this.db.object('subMenu/').$ref.child(parentId).child('items').child(deleteMenu.id).remove();
-        let contentRef = this.db.object('content/').$ref.child(deleteMenu.id).remove();
+        let contentRef = this.contents$.remove(deleteMenu.id);
     }
 
     editMisc(type: string, content: string) {        

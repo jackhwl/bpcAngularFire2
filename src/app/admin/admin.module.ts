@@ -28,6 +28,7 @@ const AdminRoutes: Routes = [
             { path: 'menu-edit/:sub', component: MenuEditComponent, canActivate: [UserService] },
             { path: 'login', component: LoginComponent },
             { path: 'signup', component: SignUpComponent },
+            { path: 'menu/:id', component:　MenuEditComponent, canActivate: [UserService] },
             { path: '', component: AdminMenuComponent, canActivate: [UserService] }
         ]
     }
