@@ -8,7 +8,7 @@ import { AdminMenuComponent } from './adminMenu/admin-menu.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signUp/sign-up.component';
 
-import { UserService } from '../core/services';
+import { UserService, AuthGuard, AuthService } from '../core/services';
 import { MenuAdminService } from './adminShared/menu-admin.service';
 
 import { MenuAdminComponent } from './menuAdmin/menu-admin.component';
@@ -21,15 +21,15 @@ import { TruncatePipe } from './adminShared/trunc.pipe';
 const AdminRoutes: Routes = [
     {
         path: 'admin',
-        component: AdminComponent,
+        component: AdminComponent, 
         children: [
-            { path: 'menu-admin', component: MenuAdminComponent, canActivate: [UserService] },
-            { path: 'sub-menu-admin', component: SubMenuAdminComponent, canActivate: [UserService] },
-            { path: 'menu-edit/:sub', component: MenuEditComponent, canActivate: [UserService] },
+            { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] },
+            { path: 'sub-menu-admin', component: SubMenuAdminComponent, canActivate: [AuthGuard] },
+            { path: 'menu-edit/:sub', component: MenuEditComponent, canActivate: [AuthGuard] },
             { path: 'login', component: LoginComponent },
             { path: 'signup', component: SignUpComponent },
-            { path: 'menu/:id', component:　MenuEditComponent, canActivate: [UserService] },
-            { path: '', component: AdminMenuComponent, canActivate: [UserService] }
+            { path: 'menu/:id', component:　MenuEditComponent, canActivate: [AuthGuard] },
+            { path: '', component: AdminMenuComponent, canActivate: [AuthGuard] }
         ]
     }
 ];
@@ -57,7 +57,9 @@ const AdminRoutes: Routes = [
     ],
     providers: [
         UserService,
-        MenuAdminService
+        MenuAdminService,
+        AuthGuard,
+        AuthService
     ]
 })
 export class AdminModule {}

@@ -46,7 +46,8 @@ import '../styles/headings.css';
 
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
-import { EnvService, MenuService } from './core/services';
+import { EnvService, MenuService, AuthGuard, AuthService } from './core/services';
+
 
 
 // Application wide providers
@@ -89,7 +90,7 @@ type StoreType = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-   AngularFireDatabaseModule,
+    AngularFireDatabaseModule,
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
@@ -102,7 +103,9 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS,
     EnvService,
-    MenuService
+    MenuService,
+    AuthGuard,
+    AuthService
   ]
 })
 export class AppModule {

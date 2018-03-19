@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, MenuService } from '../services';
+import { UserService, MenuService, AuthService } from '../services';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
     loggedInUser: string;
     // public userSVC: UserService; 
     // public menuSVC: MenuService;
-    constructor(private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router) {
+    constructor(private userSVC: UserService, public authService: AuthService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router) {
         //this.userSVC = userSV;
     }
   

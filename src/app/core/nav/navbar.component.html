@@ -38,7 +38,7 @@
                </a>
           </div>
         </li>
-        <li *ngIf="userSVC.loggedInUser" class="nav-item">
+        <li *ngIf="(authService.user$ | async)?.uid" class="nav-item">
           <a class="nav-link" (click)="adminRoute()" [routerLink]=" ['./admin'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Admin</a>
         </li>
       </ul>
