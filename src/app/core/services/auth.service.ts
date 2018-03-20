@@ -39,7 +39,7 @@ export class AuthService {
     logout() {
         this.afAuth.auth.signOut().then(function(){
             console.log('Logged Out');
-            this.router.navigate(['/home']);
+            //this.router.navigate(['/home']);
         }, function(error) {
             alert('${error.message} Unabled to logout. Try again!');
         });

@@ -20,8 +20,8 @@ export class AdminMenuComponent implements OnInit {
     constructor(  private menuAdminSVC: MenuAdminService, private menuSVC: MenuService, private userSVC: UserService, private router: Router ) {}
 
     ngOnInit(): void {
-        //this.theUser = this.userSVC.loggedInUser;
-        //this.menuSVC.currentMenu = menu;
+        this.menuSVC.getTopNav('admin', null);
+        this.menuSVC.getMisc();
     }
 
     chooseMode(mode: string){
@@ -40,8 +40,8 @@ export class AdminMenuComponent implements OnInit {
         this.misc$ = this.menuSVC.getMisc();
       }
     
-    logout(){
-        this.userSVC.logout();
-        this.router.navigate(['']);
-    }
+    // logout(){
+    //     this.userSVC.logout();
+    //     this.router.navigate(['']);
+    // }
  }

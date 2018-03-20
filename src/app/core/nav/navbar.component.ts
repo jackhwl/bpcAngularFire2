@@ -35,6 +35,12 @@ export class NavComponent implements OnInit {
         this.router.navigate(['./admin']); 
     }
 
+    logout() {
+        this.menuSVC.getContent(this.menuSVC.topMenu[0]);
+        this.menuSVC.getContent(this.menuSVC.topMenu[0].items[0]);
+        this.authService.logout();
+    }
+
     changeSubRoute(menu, subMenu) {
         this.menuSVC.currentMenu = menu;
         this.menuSVC.currentSubMenu = subMenu;
