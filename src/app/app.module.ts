@@ -12,6 +12,10 @@ import { AngularFireModule } from 'angularfire2';
 // // for database
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 //import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+
+import { StoreModule } from '@ngrx/store';
+import { menuReducer } from './reducers/menu.reducer';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -20,7 +24,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
+import { InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { HeaderComponent } from './header';
 import { FooterComponent } from './footer';
@@ -47,13 +51,16 @@ import '../styles/headings.css';
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { EnvService, MenuService, AuthGuard, AuthService } from './core/services';
+import { EffectsModule } from '@ngrx/effects';
+import { miscReducer } from './reducers/misc.reducer';
+import { MiscEffects } from './effects/misc.effects';
 
 
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
+  ...APP_RESOLVER_PROVIDERS
+  //AppState
 ];
 
 type StoreType = {
@@ -94,7 +101,9 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
-    })
+    }),
+    StoreModule.forRoot({menus: menuReducer, misc: miscReducer}),
+    EffectsModule.forRoot([MiscEffects])
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -112,7 +121,7 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState
+    //public appState: AppState
   ) {}
 
   public hmrOnInit(store: StoreType) {
@@ -123,7 +132,7 @@ export class AppModule {
     /**
      * Set state
      */
-    this.appState._state = store.state;
+    //this.appState._state = store.state;
     /**
      * Set input values
      */
@@ -142,8 +151,8 @@ export class AppModule {
     /**
      * Save state
      */
-    const state = this.appState._state;
-    store.state = state;
+    //const state = this.appState._state;
+    //store.state = state;
     /**
      * Recreate root elements
      */

@@ -6,6 +6,7 @@ import { Menu, Misc } from '../models';
 // import {AngularFireAuthModule} from 'angularfire2/auth';
 // // for database
 import {AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 //import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 
 @Injectable()
@@ -16,7 +17,7 @@ export class MenuService {
     currentMenu: Menu;
     currentSubMenu: Menu;
     content$: FirebaseObjectObservable<string>;
-    misc$: FirebaseObjectObservable<Misc>;
+    misc$: Observable<Misc>;
     subMenu$: FirebaseObjectObservable<Menu>;
     menu$: FirebaseListObservable<Menu[]>;
 

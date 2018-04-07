@@ -1,11 +1,8 @@
-export class Menu {
-    constructor(
-        public name: string,
-        public order: number,
-        public enable: boolean,
-        public id?: string,
-        public items?: Menu[],
-        public content?: string
-    ){}
-
+export interface Menu {
+    name: string,
+    order: number,
+    enable: boolean,
+    id?: string,
+    items?: Menu[],
+    content?: string
 }

@@ -7,7 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 //import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { AppState } from './app.service';
+//import { AppState } from './app.service';
 //import { EnvService, UserService, MenuService } from './core/services';
 
 /**
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   public url = 'https://twitter.com/AngularClass';
 
   constructor(
-    public appState: AppState//, private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute
+    //public appState: AppState//, private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute
   ) {}
 
   public ngOnInit() {

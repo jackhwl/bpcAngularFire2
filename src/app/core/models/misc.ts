@@ -1,7 +1,4 @@
-export class Misc {
-    constructor(
-        public footer: {content: string},
-        public header: {content: string}
-    ){}
-
+export interface Misc {
+    footer: {content: string},
+    header: {content: string}
 }
