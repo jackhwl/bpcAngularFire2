@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   misc$: Observable<Misc>;
   
   constructor(private store: Store<AppState>, private sanitizer: DomSanitizer
-    //private userSVC: UserService, 
+    //private userSVC: UserService,
   ) {
     this.misc$ = this.store.select(state => state.misc);
   }
