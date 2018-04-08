@@ -20,7 +20,7 @@ export class AdminMenuComponent implements OnInit {
     constructor(  private menuAdminSVC: MenuAdminService, private menuSVC: MenuService, private userSVC: UserService, private router: Router ) {}
 
     ngOnInit(): void {
-        this.menuSVC.getTopNav('admin', null);
+        this.menuSVC.setTopNav('admin', null);
         this.menuSVC.getMisc();
     }
 

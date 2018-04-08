@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { Misc } from '../core/models';
-import { EnvService, UserService, MenuService } from '../core/services';
-import { FirebaseObjectObservable } from 'angularfire2/database';
+//import { EnvService, UserService, MenuService } from '../core/services';
+//import { FirebaseObjectObservable } from 'angularfire2/database';
 import { Store } from '@ngrx/store';
 import { AppState } from '../core/models/app-state';
 import { Observable } from 'rxjs/Observable';

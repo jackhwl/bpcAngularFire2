@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   constructor(private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
 
   public ngOnInit() {
-    this.menuSVC.getTopNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
+    this.menuSVC.setTopNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getMisc();
   }
 

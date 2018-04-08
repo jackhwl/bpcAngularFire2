@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, MenuService, AuthService } from '../services';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../models/app-state';
+import { Observable } from 'rxjs/Observable';
+import { Menu } from '../models';
+import * as menuActions from './../../actions/menu.actions';
 
 @Component({
     selector: 'bc-nav-bar',    
@@ -9,17 +14,26 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class NavComponent implements OnInit {
+    menus$: Observable<Menu[]>;
     public bpcLogo = 'https://firebasestorage.googleapis.com/v0/b/bpcsite-277ab.appspot.com/o/images%2Fbpclogo.jpg?alt=media&token=8d39ab91-c0f8-43f6-b637-e43cf80117fa';
     //public url = 'http://localhost:3001';
-    loggedInUser: string;
+    //loggedInUser: string;
     // public userSVC: UserService; 
     // public menuSVC: MenuService;
-    constructor(private userSVC: UserService, private authService: AuthService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router) {
+    constructor(private store: Store<AppState>, private userSVC: UserService, private authService: AuthService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router) {
         //this.userSVC = userSV;
+        this.menus$ = this.store.select(state => state.menus);
     }
   
     public ngOnInit() {
         //this.loggedInUser = this.userSVC.loggedInUser;
+        this.getMenus();
+        // let iterator = [1,2,3].iterator();
+        // console.log(iterator.next());
+    }
+
+    getMenus() {
+        this.store.dispatch(new menuActions.LoadMenusAction());
     }
 
     changeRoute(menu) {

@@ -54,7 +54,8 @@ import { EnvService, MenuService, AuthGuard, AuthService } from './core/services
 import { EffectsModule } from '@ngrx/effects';
 import { miscReducer } from './reducers/misc.reducer';
 import { MiscEffects } from './effects/misc.effects';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MenuEffects } from './effects/menu.effects';
 
 
 // Application wide providers
@@ -103,7 +104,8 @@ type StoreType = {
       preloadingStrategy: PreloadAllModules
     }),
     StoreModule.forRoot({menus: menuReducer, misc: miscReducer}),
-    EffectsModule.forRoot([MiscEffects])
+    EffectsModule.forRoot([MiscEffects, MenuEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

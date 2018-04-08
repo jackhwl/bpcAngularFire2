@@ -19,7 +19,7 @@ export class MenuService {
     content$: FirebaseObjectObservable<string>;
     misc$: Observable<Misc>;
     subMenu$: FirebaseObjectObservable<Menu>;
-    menu$: FirebaseListObservable<Menu[]>;
+    menu$: Observable<Menu[]>;
 
     constructor(private db: AngularFireDatabase ) {
         this.misc$ = this.db.object('misc');
@@ -27,7 +27,7 @@ export class MenuService {
         this.subMenu$ = this.db.object('subMenu');
         this.menu$ = this.db.list('menu');
     }
-    getTopNav(routeMenu: string, routeSubMenu: string = null){
+    setTopNav(routeMenu: string, routeSubMenu: string = null){
         if (!this.topMenu) {
             //let dbRef = this.menu$.$ref.orderByChild('order');
             let dbRef = this.db.list('menu', {query: {orderByChild: 'order'}}).$ref;
@@ -96,5 +96,44 @@ export class MenuService {
     getMisc() {
         return this.misc$;
     }
+
+    getMenus() {
+        //this.setTopNav('home');
+        //return Observable.of(this.topMenu);
+        return this.menu$;
+    }
+
+    getTopNav(routeMenu: string, routeSubMenu: string = null){
+        //if (!this.topMenu) {
+            //let dbRef = this.menu$.$ref.orderByChild('order');
+            let dbRef = this.db.list('menu', {query: {orderByChild: 'order'}}).$ref;
+            dbRef.once('value')
+                .then((snapshot) => {
+                    let tmp: string[] = [];
+                    snapshot.forEach(function(childSnapshot){
+                        let item = childSnapshot.val();
+                        if (item.enable) tmp.push(childSnapshot.val());
+                    })
+                    this.menu$ = Observable.of(Object.keys(tmp).map(key => tmp[key]));
+                    //console.log(routeMenu);
+                    if (routeMenu.toLowerCase() === 'admin') {
+                        this.topMenu.forEach(m => {
+                            this.getSubNav(m, null, false);
+                        });
+                    } else {
+                        if (routeMenu.toLowerCase() === 'home' && this.topMenu[0].name.toLowerCase() !== 'home') routeMenu = this.topMenu[0].name.toLowerCase();                    
+                        this.topMenu.forEach(m => {
+                            if (m.name.toLowerCase() === routeMenu.toLowerCase().replace(/-/g, ' ')) {
+                                this.currentMenu = m;
+                                this.getSubNav(m, routeSubMenu, true);
+                            } else {
+                                this.getSubNav(m, routeSubMenu, false);
+                            }
+                        });
+                    }
+            });
+        //}
+    } 
+
   }
 

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
     public ngOnInit() {
         if (!this.menuSVC.topMenu) {
-           this.menuSVC.getTopNav('admin', null);
+           this.menuSVC.setTopNav('admin', null);
            this.menuSVC.getMisc();
         }
       }
