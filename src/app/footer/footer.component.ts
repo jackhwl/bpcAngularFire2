@@ -1,25 +1,29 @@
 import { Component, OnInit} from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { Misc } from '../core/models';
-import { EnvService, UserService, MenuService } from '../core/services';
-import { FirebaseObjectObservable } from 'angularfire2/database';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/models/app-state';
+import { Observable } from 'rxjs/Observable';
+import * as miscActions from './../actions/misc.actions';
 
 @Component({
   selector: 'bc-footer',  
   styleUrls: [ './footer.component.css' ],
   templateUrl: './footer.component.html'
 })
+
 export class FooterComponent implements OnInit {
-  misc$: FirebaseObjectObservable<Misc>;
-  
-  constructor(private userSVC: UserService, private menuSVC: MenuService, private sanitizer: DomSanitizer) {}
+  misc$: Observable<Misc>;
+  constructor(private store: Store<AppState>, private sanitizer: DomSanitizer) {
+    this.misc$ = this.store.select(state => state.misc);
+  }
 
   ngOnInit() {
     this.getMisc();
   }
 
-  getMisc(): any {
-    this.misc$ = this.menuSVC.getMisc();
+  getMisc() {
+    this.store.dispatch(new miscActions.LoadMiscAction());
   }
 
 }
