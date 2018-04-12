@@ -27,6 +27,16 @@ export class MenuService {
         this.subMenu$ = this.db.object('subMenu');
         this.menu$ = this.db.list('menu');
     }
+    getNav(routeMenu: string, routeSubMenu: string = null){
+        //const b1$ = this.db.list('menu', {query: {orderByChild: 'order'}})
+        const b$ = this.menu$
+            .map(keys => keys.map(key => key.id))
+            
+            .do(console.log);
+
+        b$.subscribe();
+    }
+
     setTopNav(routeMenu: string, routeSubMenu: string = null){
         if (!this.topMenu) {
             //let dbRef = this.menu$.$ref.orderByChild('order');

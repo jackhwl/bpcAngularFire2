@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit() {
     this.menuSVC.setTopNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
+    this.menuSVC.getNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getMisc();
   }
 
