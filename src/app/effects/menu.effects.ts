@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MenuService } from '../core/services';
 import { Effect, Actions } from '@ngrx/effects';
 import * as menuActions from './../actions/menu.actions';
-import { map, switchMap } from 'rxjs/operators'
+import { map, switchMap} from 'rxjs/operators'
 
 @Injectable()
 export class MenuEffects {
