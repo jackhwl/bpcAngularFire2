@@ -72,6 +72,10 @@ a {
     line-height: 1.5;
     width: 100%;
 }
+.genesis-nav-menu .menu-item {
+    display: inline-block;
+    text-align: left;
+}
 .genesis-nav-menu .sub-menu {
     border-top: 1px solid #fff;
     left: -9999px;
@@ -85,8 +89,14 @@ a {
     width: 200px;
     z-index: 999;
 }
+
+ol, ul {
+    margin: 0;
+    padding: 0;
+}
+
 @media only screen and (max-width: 1023px) {
-    .site-header .title-area {
+    .nav-primary, .site-header .title-area {
         text-align: center;
         width: 100%
     }
