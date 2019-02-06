@@ -62,6 +62,7 @@ a {
 
 .nav-primary {
     background-color: #6ab446;
+    height: 50px;
 }
 .genesis-nav-menu, .genesis-nav-menu a {
     color: #fff;
@@ -112,24 +113,25 @@ li a {
     line-height: 50px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #fff;
-    background: #2f3036;
+    background: #6ab446;
     text-decoration: none;
 }
 /*Hover state for top level links*/
 li:hover a {
-    background: #19c589;
+    color: #000000;
+    background: #ffffff;
 }
 /*Style for dropdown links*/
 li:hover ul a {
     background: #f3f3f3;
-    color: #2f3036;
+    color: #000000;
     height: 40px;
     line-height: 40px;
 }
 /*Hover state for dropdown links*/
 li:hover ul a:hover {
-    background: #19c589;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
 }
 /*Hide dropdown links until they are needed*/
 li ul {
@@ -155,7 +157,6 @@ ul li a:hover + .hidden, .hidden:hover {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-decoration: none;
     color: #fff;
-    background: #19c589;
     text-align: center;
     padding: 10px 0;
     display: none;
