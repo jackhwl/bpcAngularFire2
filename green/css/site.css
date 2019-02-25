@@ -169,6 +169,19 @@ input[type=checkbox]{
 input[type=checkbox]:checked ~ #menu{
     display: block;
 }
+
+main {
+    float: left;
+    background-color: #ffffff;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 3px;
+    width: 760px;
+}
+
+aside {
+    float: right;
+}
 /*Responsive Styles*/
 @media screen and (max-width : 760px){
     /*Make dropdown links appear inline*/
@@ -200,7 +213,7 @@ input[type=checkbox]:checked ~ #menu{
     }
 }
 @media only screen and (max-width: 1180px) {
-    .wrap {
+    .site-header .wrap {
         max-width: 960px;
     }
 }
