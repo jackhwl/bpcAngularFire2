@@ -72,10 +72,18 @@ export const ENV_PROVIDERS = [
 ];
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyCFFDUhetWzzK-SB1AZCHhEwVpmtLh8ynA",
-  authDomain: "bpcsite-277ab.firebaseapp.com",
-  databaseURL: "https://bpcsite-277ab.firebaseio.com",
-  projectId: "bpcsite-277ab",
-  storageBucket: "bpcsite-277ab.appspot.com",
-  messagingSenderId: "536102140627"
+//  // bpc site  
+//   apiKey: "AIzaSyCFFDUhetWzzK-SB1AZCHhEwVpmtLh8ynA",
+//   authDomain: "bpcsite-277ab.firebaseapp.com",
+//   databaseURL: "https://bpcsite-277ab.firebaseio.com",
+//   projectId: "bpcsite-277ab",
+//   storageBucket: "bpcsite-277ab.appspot.com",
+//   messagingSenderId: "536102140627"
+  // bpc green
+  apiKey: "AIzaSyD9PGVY6eKOcBmf8yhwqCmlYq6EBBG5hPw",
+  authDomain: "bpcgreen-6cc46.firebaseio.com/",
+  databaseURL: "https://bpcgreen-6cc46.firebaseio.com/",
+  projectId: "bpcgreen-6cc46",
+  storageBucket: "bpcgreen-6cc46.appspot.com",
+  messagingSenderId: "819196190502"
 };

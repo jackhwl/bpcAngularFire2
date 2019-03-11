@@ -1,5 +1,7 @@
 bpc website use angularFire2 4.0
-test publick key agaun
+test publick key again
+use node 8.13 version to avoid sass issue(in node 10)
+
 <p align="center">
   <a href="https://tipe.io/" target="_blank">
     <img  alt="Tipe" src="https://user-images.githubusercontent.com/1016365/30999155-30430eb8-a488-11e7-850e-a7c38dad77c1.png" class="img-responsive">
