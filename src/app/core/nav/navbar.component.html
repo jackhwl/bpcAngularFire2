@@ -25,28 +25,31 @@
   <label for="show-menu" class="show-menu">Show Menu</label>
   <input type="checkbox" id="show-menu" role="button">
   <ul id="menu">
-    <li><a href="#">Home</a></li>
-    <li>
-      <a href="#">About ￬</a>
-      <ul class="hidden">
-        <li><a href="#">Who We Are</a></li>
-        <li><a href="#">What We Do</a></li>
-      </ul>
+    <li *ngFor="let menu of menuSVC.topMenu">
+      <a *ngIf="menu.items?.length<=0" (click)="changeRoute(menu)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">{{menu.name}}</a>
+      <a *ngIf="menu.items?.length>0" href="#">{{menu.name}} ￬</a>
+      <ul class="hidden" *ngIf="menu.items?.length>0">
+        <li *ngFor="let subMenu of menu.items">
+            <a (click)="changeSubRoute(menu, subMenu)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+              {{subMenu.name}}
+            </a>
+        </li>
+      </ul>  
     </li>
-    <li>
-      <a href="#">Portfolio ￬</a>
-      <ul class="hidden">
-        <li><a href="#">Photography</a></li>
-        <li><a href="#">Web & User Interface Design</a></li>
-        <li><a href="#">Illustration</a></li>
-      </ul>
-    </li>
-    <li><a href="#">News</a></li>
-    <li><a href="#">Contact</a></li>
+    <li *ngIf="(authService.user$ | async)?.uid">
+        <a (click)="adminRoute()" [routerLink]=" ['./admin'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Admin</a>
+      </li>
+
+      <li *ngIf="(authService.user$ | async)?.uid">
+          {{(authService.user$ | async)?.email}}
+        </li>
+        <li *ngIf="(authService.user$ | async)?.uid">
+          <a (click)="logout()" [routerLink]=" ['./home'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Logout</a>
+      </li>
   </ul>
   <!-- </div> -->
 </nav>
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -78,7 +81,7 @@
     </ul>
 
     </div>
-  </nav>
+  </nav> -->
 
 <!-- <nav>
     <a [routerLink]=" ['./'] "
