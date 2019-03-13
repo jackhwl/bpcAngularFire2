@@ -21,7 +21,7 @@ export class AdminMenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.menuSVC.setTopNav('admin', null);
-        this.menuSVC.getMisc();
+        this.getMisc();
     }
 
     chooseMode(mode: string){
@@ -38,6 +38,8 @@ export class AdminMenuComponent implements OnInit {
 
     getMisc(): any {
         this.misc$ = this.menuSVC.getMisc();
+        this.misc$.subscribe(data=> this.misc=data);
+        console.log(this.misc);
       }
     
     // logout(){

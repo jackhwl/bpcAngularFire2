@@ -37,15 +37,15 @@
       </ul>  
     </li>
     <li *ngIf="(authService.user$ | async)?.uid">
-        <a (click)="adminRoute()" [routerLink]=" ['./admin'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Admin</a>
-      </li>
+      <a (click)="adminRoute()" [routerLink]=" ['./admin'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Admin</a>
+    </li>
 
-      <li *ngIf="(authService.user$ | async)?.uid">
-          {{(authService.user$ | async)?.email}}
-        </li>
-        <li *ngIf="(authService.user$ | async)?.uid">
-          <a (click)="logout()" [routerLink]=" ['./home'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Logout</a>
-      </li>
+    <li *ngIf="(authService.user$ | async)?.uid">
+      {{(authService.user$ | async)?.email}}
+    </li>
+    <li *ngIf="(authService.user$ | async)?.uid">
+      <a (click)="logout()" [routerLink]=" ['./home'] "  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Logout</a>
+    </li>
   </ul>
   <!-- </div> -->
 </nav>

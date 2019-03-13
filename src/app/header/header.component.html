@@ -2,15 +2,8 @@
 <header class="site-header">
     <div class="wrap">
         <div class="title-area">
-            <p class="site-title"><a href="https://demo.studiopress.com/outreach/" *ngIf="misc$ | async as misc" [innerHTML]="sanitizer.bypassSecurityTrustHtml(misc?.header?.content || '')">Outreach Pro</a></p>
+            <p class="site-title"><a href="https://demo.studiopress.com/outreach/" *ngIf="misc$ | async as misc" [innerHTML]="sanitizer.bypassSecurityTrustHtml(misc?.header?.content || '')"></a></p>
         </div>
     </div>
 </header>
-<!-- <header class="site-header">
-		<div class="wrap">
-			<div class="title-area">
-				<p class="site-title"><a href="https://demo.studiopress.com/outreach/">Outreach Pro</a></p>
-			</div>
-		</div>
-	</header> -->
 <bc-nav-bar></bc-nav-bar>

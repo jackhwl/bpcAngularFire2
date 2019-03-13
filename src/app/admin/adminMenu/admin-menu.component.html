@@ -1,5 +1,5 @@
-<div class="top-bar">
-    <!--<div class="top-bar-title">BPC Admin area</div>
+<!-- <div class="top-bar">
+    <div class="top-bar-title">BPC Admin area</div>
 
      <div class="top-bar-left">
         <ul class="menu">
@@ -8,34 +8,27 @@
             <li class="admin-menu"><a [routerLink]="['/admin/sub-menu-admin']">Manage Sub Menu</a></li>
             <li class="admin-menu"><a href="#">Two</a></li>
         </ul>
-    </div> -->
+    </div> 
     <div *ngIf="theUser" class="top-bar-right">
         <ul class="menu">
-            <!-- <li class="admin-menu">
+            <li class="admin-menu">
                 <a (click)="logout()">Logout</a>
-            </li> -->
+            </li>
             <li class="admin-menu">
                 <a> {{theUser}} Logged in</a>
             </li>
         </ul>
     </div>
-</div>
+</div> -->
 <!-- <div class="btn-group">
     <a class="btn btn-secondary" [routerLink]="['/admin/blog-admin']" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Blog</a>
 </div> -->
-<div class="btn-group">
-    <a class="btn btn-secondary" [routerLink]="['/admin/menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Menu</a>
+<div class="content">
+    <a [routerLink]="['/admin/menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Menu</a>
+    <a [routerLink]="['/admin/sub-menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Sub Menu</a>
+    <a (click)="chooseMode('header')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Header</a>
+    <a (click)="chooseMode('footer')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Footer</a>
 </div>
-<div class="btn-group">
-    <a class="btn btn-secondary" [routerLink]="['/admin/sub-menu-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Sub Menu</a>
-</div>
-<div class="btn-group">
-    <a class="btn btn-secondary" (click)="chooseMode('header')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Header</a>
-</div>
-<div class="btn-group">
-    <a class="btn btn-secondary" (click)="chooseMode('footer')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage Footer</a>
-</div>
-
 <div class="container-fluid">
     <div *ngIf="headerChoice">
         <form>
