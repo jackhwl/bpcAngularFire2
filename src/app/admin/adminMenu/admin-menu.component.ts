@@ -38,8 +38,8 @@ export class AdminMenuComponent implements OnInit {
 
     getMisc(): any {
         this.misc$ = this.menuSVC.getMisc();
-        this.misc$.subscribe(data=> this.misc=data);
-        console.log(this.misc);
+        //this.misc$.subscribe(data=> this.misc=data);
+        //console.log(this.misc);
       }
     
     // logout(){
