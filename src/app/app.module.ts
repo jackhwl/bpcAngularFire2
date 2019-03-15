@@ -34,9 +34,9 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
-import 'script-loader!jquery';
+//import 'script-loader!jquery';
 //import 'bootstrap/dist/js/bootstrap.bundle.js';
-import 'bootstrap/dist/js/bootstrap.min.js';
+//import 'bootstrap/dist/js/bootstrap.min.js';
 //import 'popper.js';
 //import 'bootstrap/js/dist/dropdown';
 

@@ -15,7 +15,7 @@ export class AdminMenuComponent implements OnInit {
     headerChoice: string = '';
     content: string;
     misc: Misc;
-    misc$: FirebaseObjectObservable<Misc>;
+    //misc$: FirebaseObjectObservable<Misc>;
     
     constructor(  private menuAdminSVC: MenuAdminService, private menuSVC: MenuService, private userSVC: UserService, private router: Router ) {}
 
@@ -25,7 +25,7 @@ export class AdminMenuComponent implements OnInit {
     }
 
     chooseMode(mode: string){
-        //this.content = mode === 'header' ? this.misc$.header.content : this.menuSVC.misc.footer.content;
+        this.content = mode === 'header' ? this.misc.header.content : this.misc.footer.content; //this.menuSVC.misc.footer.content;
         this.headerChoice = mode;
     }
 
@@ -37,9 +37,7 @@ export class AdminMenuComponent implements OnInit {
     }
 
     getMisc(): any {
-        this.misc$ = this.menuSVC.getMisc();
-        //this.misc$.subscribe(data=> this.misc=data);
-        //console.log(this.misc);
+        this.menuSVC.getMisc().subscribe(data=> this.misc=data);
       }
     
     // logout(){
