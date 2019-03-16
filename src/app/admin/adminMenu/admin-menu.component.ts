@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Misc } from '../../core/models';
 import { FirebaseObjectObservable } from 'angularfire2/database';
+import { FormGroup, FormControl } from '@angular/forms';
+
 
 @Component({
     templateUrl: './admin-menu.component.html',
@@ -11,27 +13,31 @@ import { FirebaseObjectObservable } from 'angularfire2/database';
 })
 
 export class AdminMenuComponent implements OnInit {
+    editorForm: FormGroup;
     theUser: string;
     headerChoice: string = '';
-    content: string;
     misc: Misc;
     //misc$: FirebaseObjectObservable<Misc>;
     
     constructor(  private menuAdminSVC: MenuAdminService, private menuSVC: MenuService, private userSVC: UserService, private router: Router ) {}
 
     ngOnInit(): void {
+        this.editorForm = new FormGroup({
+            editContent: new FormControl()
+        });
         this.menuSVC.setTopNav('admin', null);
         this.getMisc();
     }
 
     chooseMode(mode: string){
-        this.content = mode === 'header' ? this.misc.header.content : this.misc.footer.content; //this.menuSVC.misc.footer.content;
+        const content = mode === 'header' ? this.misc.header.content : this.misc.footer.content; //this.menuSVC.misc.footer.content;
+        this.editorForm.controls.editContent.setValue(content);
         this.headerChoice = mode;
     }
 
     updateMisc() {
         if (this.headerChoice) {
-            this.menuAdminSVC.editMisc(this.headerChoice, this.content);
+            this.menuAdminSVC.editMisc(this.headerChoice, this.editorForm.controls.editContent.value);
         }
         this.headerChoice = '';
     }

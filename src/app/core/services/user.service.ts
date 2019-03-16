@@ -69,12 +69,12 @@ export class UserService implements CanActivate {
         });
     }
 
-    // logout() {
-    //     this.userLoggedIn = false;
-    //     this.au.auth.signOut().then(function(){
-    //         console.log('Logged Out');
-    //     }, function(error) {
-    //         alert('${error.message} Unabled to logout. Try again!');
-    //     });
-    // }
+    logout() {
+        this.userLoggedIn = false;
+        this.au.auth.signOut().then(function(){
+            console.log('Logged Out');
+        }, function(error) {
+            alert('${error.message} Unabled to logout. Try again!');
+        });
+    }
 }

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { QuillModule } from 'ngx-quill';
 
 import { AdminComponent } from './adminComponent/admin.component';
 import { AdminMenuComponent } from './adminMenu/admin-menu.component';
@@ -38,6 +40,8 @@ const AdminRoutes: Routes = [
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
+        QuillModule,
         RouterModule.forChild(AdminRoutes)
     ],
     exports: [

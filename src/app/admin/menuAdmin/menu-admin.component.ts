@@ -5,13 +5,13 @@ import * as firebase from 'firebase';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Menu } from '../../core/models';
 
-
 @Component({
     templateUrl: '/menu-admin.component.html',
     styleUrls: ['./menu-admin.component.css']
 })
 
 export class MenuAdminComponent implements OnInit {
+    //editorForm: FormGroup;
     theUser: string;
     menuChoice: string;
     nav: Menu[];
@@ -33,6 +33,9 @@ export class MenuAdminComponent implements OnInit {
     }
 
     ngOnInit(){
+        // this.editorForm = new FormGroup({
+        //     'editor': new FormGroup(null)
+        // });
         this.theUser = this.userSVC.loggedInUser;
         this.getNav();
     }
