@@ -23,7 +23,8 @@ export class AdminMenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.editorForm = new FormGroup({
-            editContent: new FormControl()
+            editContent: new FormControl(),
+            'editor': new FormControl(null)
         });
         this.menuSVC.setTopNav('admin', null);
         this.getMisc();

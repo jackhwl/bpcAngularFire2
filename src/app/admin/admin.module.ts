@@ -20,6 +20,9 @@ import { SubMenuAdminComponent } from './subMenuAdmin/sub-menu-admin.component';
 
 import { TruncatePipe } from './adminShared/trunc.pipe';
 
+
+
+
 const AdminRoutes: Routes = [
     {
         path: 'admin',

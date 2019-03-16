@@ -39,14 +39,19 @@ import { XLargeDirective } from './home/x-large';
 //import 'bootstrap/dist/js/bootstrap.min.js';
 //import 'popper.js';
 //import 'bootstrap/js/dist/dropdown';
+//import 'script-loader!quill';
+//import 'quill/dist/quill.js';
 
 //import 'firebase/firebase.js';
 //import * as firebase from 'firebase';
 //import 'css-loader!bootstrap';
+//import 'css-loader!quill';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
 //import 'bootstrap/dist/css/bootstrap.css'
+//import 'quill/dist/quill.core.css';
+//import 'quill/dist/quill.snow.css';
 
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
