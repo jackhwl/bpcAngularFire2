@@ -23,8 +23,8 @@ export class AdminMenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.editorForm = new FormGroup({
-            editContent: new FormControl(),
-            'editor': new FormControl(null)
+            //editContent: new FormControl(),
+            editContent: new FormControl()
         });
         this.menuSVC.setTopNav('admin', null);
         this.getMisc();
@@ -33,6 +33,7 @@ export class AdminMenuComponent implements OnInit {
     chooseMode(mode: string){
         const content = mode === 'header' ? this.misc.header.content : this.misc.footer.content; //this.menuSVC.misc.footer.content;
         this.editorForm.controls.editContent.setValue(content);
+        //this.editorForm.controls.editor.setValue(content);
         this.headerChoice = mode;
     }
 
