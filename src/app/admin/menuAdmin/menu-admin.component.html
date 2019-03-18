@@ -1,4 +1,4 @@
-<div class="top-bar">
+<div class="admin-content">
     <!-- <div class="top-bar-title">BPC Admin area</div> -->
 
     <!-- <div class="top-bar-left">
@@ -22,8 +22,7 @@
     <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Menu</a>
 </div>
 
-<div class="container-fluid">
-<div [ngSwitch]="menuChoice">
+<div [ngSwitch]="menuChoice" class="admin-content">
     <div *ngSwitchCase="'add'"><add-menu></add-menu></div>
     <div *ngSwitchCase="'addSub'"><add-menu parentId={{parentId}}></add-menu></div>
     <div *ngSwitchDefault>
@@ -124,5 +123,4 @@
             </form>
         </div>
     </div>
-</div>
 </div>
