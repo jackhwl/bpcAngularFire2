@@ -29,7 +29,6 @@ body {
     font-size: 43px;
     font-weight: 700;
     line-height: 1;
-    text-transform: uppercase;
     text-align: center;
     margin-bottom: 0;
 }
@@ -392,6 +391,10 @@ input, select, textarea {
 .site-footer p {
 	margin-bottom: 0;
 }
+
+.ql-showHtml:after {
+    content: "[source]";
+  }
 /*Responsive Styles*/
 @media only screen and (max-width: 1180px) {
     .site-header .wrap {
