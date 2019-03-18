@@ -12,6 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
     styleUrls:['./admin-menu.component.css']
 })
 
+
 export class AdminMenuComponent implements OnInit {
     editorForm: FormGroup;
     theUser: string;
@@ -45,6 +46,8 @@ export class AdminMenuComponent implements OnInit {
             ['showHtml'] //https://codepen.io/anon/pen/ZyEjrQ
         ]
     };
+    txtArea: HTMLTextAreaElement;
+
     //misc$: FirebaseObjectObservable<Misc>;
     
     constructor(  private menuAdminSVC: MenuAdminService, private menuSVC: MenuService, private userSVC: UserService, private router: Router ) {}
@@ -52,31 +55,43 @@ export class AdminMenuComponent implements OnInit {
     ngOnInit(): void {
         this.editorForm = new FormGroup({
             editContent: new FormControl(),
-            sourceContent: new FormControl()
+            sourceContent: new FormControl(),
+            quillEditor: new FormControl(),
         });
         this.menuSVC.setTopNav('admin', null);
         this.getMisc();
+    }
 
-        // var customButton = document.querySelector('.ql-showHtml');
-        // customButton.addEventListener('click', function() {
-        //     if (this.editorForm.controls.sourceContent.style.display === '') {
-        //         var html = this.editorForm.controls.sourceContent.value;
-        //         //self.quill.pasteHTML(html)
-        //     }
-        //     this.editorForm.controls.sourceContent.style.display = this.editorForm.controls.sourceContent.style.display === 'none' ? '' : 'none'
-        // });
+    editorCreated(e) {
+        let quill = e;
+        this.txtArea = document.createElement('textarea');
+        this.txtArea.setAttribute('formControlName', 'sourceContent');
+        this.txtArea.style.cssText = "width: 100%;margin: 0px;background: rgb(29, 29, 29);box-sizing: border-box;color: rgb(204, 204, 204);font-size: 15px;outline: none;padding: 20px;line-height: 24px;font-family: Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace;position: absolute;top: 0;bottom: 0;border: none;display:none"
+
+        let htmlEditor = quill.addContainer('ql-custom');
+        htmlEditor.appendChild(this.txtArea);
+        this.txtArea.value = this.editorForm.controls.editContent.value;
+        let customButton = document.querySelector('.ql-showHtml');
+        customButton.addEventListener('click', () => {
+            if (this.txtArea.style.display === '') {
+                this.editorForm.controls.editContent.setValue(this.txtArea.value);
+                //quill.pasteHTML(html);
+            } else {
+                this.txtArea.value = this.editorForm.controls.editContent.value;
+            }
+            this.txtArea.style.display = this.txtArea.style.display === 'none' ? '' : 'none'
+        });
     }
 
     chooseMode(mode: string){
         const content = mode === 'header' ? this.misc.header.content : this.misc.footer.content; //this.menuSVC.misc.footer.content;
         this.editorForm.controls.editContent.setValue(content);
-        //this.editorForm.controls.editor.setValue(content);
         this.headerChoice = mode;
     }
 
     updateMisc() {
         if (this.headerChoice) {
-            this.menuAdminSVC.editMisc(this.headerChoice, this.editorForm.controls.editContent.value);
+            this.menuAdminSVC.editMisc(this.headerChoice, this.txtArea.style.display === 'none' ? this.editorForm.controls.editContent.value : this.txtArea.value );
         }
         this.headerChoice = '';
     }

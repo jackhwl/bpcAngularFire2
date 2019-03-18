@@ -393,7 +393,7 @@ input, select, textarea {
 }
 
 .ql-showHtml:after {
-    content: "[source]";
+    content: "<>";
   }
 /*Responsive Styles*/
 @media only screen and (max-width: 1180px) {

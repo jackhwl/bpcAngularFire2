@@ -40,12 +40,11 @@
             <div class="row">
                 <div class="small-12 columns">
                     <label for="editContent">Content</label>
-                        <!-- <textarea rows="15" cols="100" [(ngModel)]="content" name="editContent" #psContent="ngModel"></textarea> -->
-                        <!-- <textarea rows="15" cols="100" formControlName="editContent"></textarea> -->
                         <quill-editor [style]="editorStyle" [modules]="config" 
                         (onContentChanged)="maxLength($event)" 
+                        (onEditorCreated)="editorCreated($event)"
                         formControlName="editContent"></quill-editor>
-                        <textarea formControlName="sourceContent"></textarea>
+                        <!-- <textarea formControlName="sourceContent"></textarea> -->
                 </div>
             </div>
             <div class="row align-center">
