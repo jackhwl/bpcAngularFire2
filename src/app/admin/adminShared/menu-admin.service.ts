@@ -2,16 +2,41 @@ import { Injectable } from '@angular/core';
 //import * as firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Menu } from '../../core/models/menu';
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 
 export class MenuAdminService {
+    content$: FirebaseObjectObservable<string>;
     contents$: FirebaseListObservable<string[]>;
     subMenu$: FirebaseObjectObservable<Menu>;
+    toolbar: any;
 
     constructor(private db: AngularFireDatabase ) {
         this.subMenu$ = this.db.object('subMenu');
+        this.content$ = this.db.object('content');
         this.contents$ = this.db.list('content');
+        this.toolbar = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+          
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+          
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+          
+            ['clean'],                                         // remove formatting button
+            ['link', 'image', 'video'],
+            ['showHtml'] //https://codepen.io/anon/pen/ZyEjrQ
+        ]
     }
 
     createMenu(menu: Menu){
@@ -197,5 +222,49 @@ export class MenuAdminService {
                 }
             }
         );
+    }
+    
+    setForm(menu: Menu, form: FormGroup){
+        if (menu && !menu.content) {
+            let contentRef = this.content$.$ref.child(menu.id);
+            contentRef.once('value')
+                .then((snapshot) => {
+                    let contents = snapshot.val();
+                    menu.content = contents.content;
+                    form.setValue({
+                        editName: menu.name,
+                        editOrder: menu.order,
+                        editContent: menu.content,
+                        editEnable: menu.enable
+                    });
+            });
+        }
+    }
+
+    getEditorModules() {
+        const modules = {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+            
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+            
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+            
+                ['clean'],                                         // remove formatting button
+                ['link', 'image', 'video'],
+                ['showHtml'] //https://codepen.io/anon/pen/ZyEjrQ
+            ]
+        };
+        return modules;
     }
 }

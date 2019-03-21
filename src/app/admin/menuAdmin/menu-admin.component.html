@@ -15,14 +15,10 @@
         </ul>
     </div>
 </div>
-<div class="btn-group">
-    <a class="btn btn-secondary" (click)="chooseMode('add')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Add Menu</a>
-</div>
-<div class="btn-group">
-    <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Menu</a>
-</div>
 
 <div [ngSwitch]="menuChoice" class="admin-content">
+    <a class="btn btn-secondary" (click)="chooseMode('add')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Add Menu</a>
+    <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Menu</a>
     <div *ngSwitchCase="'add'"><add-menu></add-menu></div>
     <div *ngSwitchCase="'addSub'"><add-menu parentId={{parentId}}></add-menu></div>
     <div *ngSwitchDefault>
@@ -71,22 +67,21 @@
         </div>
 
         <div *ngIf="!formDisplay">
-            <form>
+            <form [formGroup]="editorForm">
                 <div class="row">
                     <div class="medium-12 columns"><h3>Edit Menu</h3></div>
                 </div>
                 <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Menu Name
-                            <input type="text" [(ngModel)]="singleMenu.name"
-                                name="editName" required #navName="ngModel">
+                            <input type="text" formControlName="editName" required >
                         </label>
                     </div>
                 </div>        
                 <div class="row">
                     <div class="small-12 columns">
                         <label>Menu Content
-                            <textarea rows="15" cols="100" [(ngModel)]="singleMenu.content" name="editContent" #psContent="ngModel"></textarea>
+                            <textarea rows="15" cols="100" formControlName="editContent" ></textarea>
                             <!-- <quill-editor></quill-editor> -->
                         </label>
                     </div>
@@ -94,8 +89,7 @@
                 <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Menu Order
-                            <input type="number" [(ngModel)]="singleMenu.order"
-                                name="editOrder" required >
+                            <input type="number" formControlName="editOrder" required >
                         </label>
                     </div>
                     <div class="small-12 medium-6 columns">
@@ -105,15 +99,15 @@
                 <div class="row">
                         <div class="small-12 medium-6 columns">
                             <label>Menu Enable
-                                    <input type="radio" name="editEnable" [(ngModel)]="singleMenu.enable" [value]="true"> True
-                                    <input type="radio" name="editEnable" [(ngModel)]="singleMenu.enable" [value]="false"> False
+                                    <input type="radio" formControlName="editEnable" value="true"> True
+                                    <input type="radio" formControlName="editEnable" value="false"> False
                             </label>
                         </div>
                     </div>
                 <div class="row align-center">
                     <div class="small-12 columns">
                         <div class="expanded button-group">
-                            <button class="success button" type="button" [disabled]="!navName.valid"
+                            <button class="success button" type="button" disabled0="!navName.valid"
                                 (click)="updateMenu(singleMenu)">Update Menu</button>
                             <button class="cancel button" type="button" (click)="cancelEdit()">Cancel Edit</button>
                         </div>

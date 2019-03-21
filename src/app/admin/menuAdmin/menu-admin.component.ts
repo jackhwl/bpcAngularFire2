@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Menu } from '../../core/models';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     templateUrl: '/menu-admin.component.html',
@@ -11,7 +12,7 @@ import { Menu } from '../../core/models';
 })
 
 export class MenuAdminComponent implements OnInit {
-    //editorForm: FormGroup;
+    editorForm: FormGroup;
     theUser: string;
     menuChoice: string;
     nav: Menu[];
@@ -20,7 +21,7 @@ export class MenuAdminComponent implements OnInit {
     singleMenu: Menu;
     parentId: string;
 
-    constructor(private userSVC: UserService, private router: Router, private menuSVC: MenuService, private menuAdminSVC: MenuAdminService){}
+    constructor(private userSVC: UserService, private router: Router, private menuSVC: MenuService, private menuAdminSVC: MenuAdminService, private fb: FormBuilder){}
 
     logout(){
         this.userSVC.logout();
@@ -34,8 +35,17 @@ export class MenuAdminComponent implements OnInit {
 
     ngOnInit(){
         // this.editorForm = new FormGroup({
-        //     'editor': new FormGroup(null)
+        //     editName: new FormControl(),
+        //     editContent: new FormControl(),
+        //     editOrder: new FormControl(),
+        //     editEnable: new FormControl()
         // });
+        this.editorForm = this.fb.group({
+            editName: '',
+            editContent: '',
+            editOrder: '',
+            editEnable: ''
+        })
         this.theUser = this.userSVC.loggedInUser;
         this.getNav();
     }
@@ -69,7 +79,7 @@ export class MenuAdminComponent implements OnInit {
 
     editNav(theMenu: Menu) {
         this.singleMenu = theMenu;
-        this.menuSVC.getContent(this.singleMenu);
+        this.menuAdminSVC.setForm(this.singleMenu, this.editorForm);
         this.formDisplay = false;
     }
 

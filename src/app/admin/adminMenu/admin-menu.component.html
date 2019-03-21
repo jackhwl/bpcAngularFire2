@@ -39,7 +39,7 @@
             Edit {{headerChoice}}
         </div>
         <div>
-            <quill-editor [style]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
+            <quill-editor [style]="editorStyle" [modules]="modules" (onContentChanged)="maxLength($event)"
                 (onEditorCreated)="editorCreated($event)" formControlName="editContent"></quill-editor>
             <!-- <textarea formControlName="sourceContent"></textarea> -->
 
