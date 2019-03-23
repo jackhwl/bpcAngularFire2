@@ -21,7 +21,7 @@ export class MenuAdminComponent implements OnInit {
     singleMenu: Menu;
     parentId: string;
     editorStyle = {
-        height: '200px',
+        height: '400px',
         //width: '90vw',
         backgroundColor: '#fff'
     };
@@ -48,14 +48,43 @@ export class MenuAdminComponent implements OnInit {
         //     editEnable: new FormControl()
         // });
         this.editorForm = this.fb.group({
-            editName: '',
-            editContent: '',
-            editOrder: '',
-            editEnable: ''
+            name: '',
+            content: '',
+            order: '',
+            enable: ''
         });
         this.modules = this.menuAdminSVC.getEditorModules();
         this.theUser = this.userSVC.loggedInUser;
         this.getNav();
+    }
+
+    editorCreated(e) {
+        let quill = e;
+        this.txtArea = document.createElement('textarea');
+        this.txtArea.setAttribute('formControlName', 'content');
+        this.txtArea.style.cssText = "width: 100%;margin: 0px;background: rgb(29, 29, 29);box-sizing: border-box;color: rgb(204, 204, 204);font-size: 15px;outline: none;padding: 20px;line-height: 24px;font-family: Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace;position: absolute;top: 0;bottom: 0;border: none;display:none"
+
+        let htmlEditor = quill.addContainer('ql-custom');
+        htmlEditor.appendChild(this.txtArea);
+        this.txtArea.value = this.editorForm.controls.content.value;
+        let customButton = document.querySelector('.ql-showHtml');
+        customButton.addEventListener('click', () => {
+            if (this.txtArea.style.display === '') {
+                this.editorForm.controls.content.setValue(this.txtArea.value);
+                //quill.pasteHTML(html);
+            } else {
+                this.txtArea.value = this.editorForm.controls.content.value;
+            }
+            this.txtArea.style.display = this.txtArea.style.display === 'none' ? '' : 'none'
+        });
+    }
+
+    maxLength(e) {
+        // console.log(e);
+        // if(e.editor.getLength() > 10) {
+        //     e.editor.deleteText(10, e.editor.getLength());
+        // }
+
     }
 
     getNav(){
@@ -96,12 +125,27 @@ export class MenuAdminComponent implements OnInit {
     }
 
     updateMenu(){
-        this.singleMenu.name = this.editorForm.controls.editName.value;
-        this.singleMenu.order = this.editorForm.controls.editOrder.value;
-        this.singleMenu.enable = this.editorForm.controls.editEnable.value;
-        this.singleMenu.content = this.editorForm.controls.editContent.value;
-        this.menuAdminSVC.editMenu(this.singleMenu);
-        this.formDisplay = true;
+        if (this.editorForm.valid) {
+            if (this.editorForm.dirty){
+                const menuItem = { ...this.singleMenu, ...this.editorForm.value};
+                console.log('menuItem=', menuItem);
+                console.log('this.singleMenu=', this.singleMenu);
+                console.log('this.editorForm.value=', this.editorForm.value);
+                this.menuAdminSVC.editMenu(menuItem);
+                this.formDisplay = true;
+                this.getNav();
+                this.onSaveComplete();
+            } else {
+                this.onSaveComplete();
+            }
+        } else {
+            console.log('Please correct the validation errors.');
+        }
+        // this.singleMenu.name = this.editorForm.controls.editName.value;
+        // this.singleMenu.order = this.editorForm.controls.editOrder.value;
+        // this.singleMenu.enable = this.editorForm.controls.editEnable.value;
+        // this.singleMenu.content = this.editorForm.controls.editContent.value;
+        // this.menuAdminSVC.editMenu(this.menuItem);
     }
 
     deleteNav(single: Menu){
@@ -112,5 +156,12 @@ export class MenuAdminComponent implements OnInit {
         } else {
             alert('Nothing deleted!');
         }
+    }
+
+    onSaveComplete(): void {
+        // Reset the form to clear the flags
+        console.log('onSaveComplete');
+        this.editorForm.reset();
+        //this.router.navigate(['/admin/menu-admin']);
     }
 }

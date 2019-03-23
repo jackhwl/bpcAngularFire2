@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Menu Name
-                            <input type="text" formControlName="editName" required >
+                            <input type="text" formControlName="name" required >
                         </label>
                     </div>
                 </div>        
@@ -82,7 +82,7 @@
                     <div class="small-12 columns">
                         <label>Menu Content
                             <quill-editor [style]="editorStyle" [modules]="modules" (onContentChanged)="maxLength($event)"
-                            (onEditorCreated)="editorCreated($event)" formControlName="editContent"></quill-editor>
+                            (onEditorCreated)="editorCreated($event)" formControlName="content"></quill-editor>
                             
                             <!-- <textarea rows="15" cols="100" formControlName="editContent" ></textarea> -->
                             <!-- <quill-editor></quill-editor> -->
@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Menu Order
-                            <input type="number" formControlName="editOrder" required >
+                            <input type="number" formControlName="order" required >
                         </label>
                     </div>
                     <div class="small-12 medium-6 columns">
@@ -102,8 +102,8 @@
                 <div class="row">
                         <div class="small-12 medium-6 columns">
                             <label>Menu Enable
-                                    <input type="radio" formControlName="editEnable" value="true"> True
-                                    <input type="radio" formControlName="editEnable" value="false"> False
+                                    <input type="radio" formControlName="enable" value="true"> True
+                                    <input type="radio" formControlName="enable" value="false"> False
                             </label>
                         </div>
                     </div>

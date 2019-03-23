@@ -232,10 +232,10 @@ export class MenuAdminService {
                     let contents = snapshot.val();
                     menu.content = contents.content;
                     form.setValue({
-                        editName: menu.name,
-                        editOrder: menu.order,
-                        editContent: menu.content,
-                        editEnable: menu.enable
+                        name: menu.name,
+                        order: menu.order,
+                        content: menu.content,
+                        enable: menu.enable
                     });
             });
         }
