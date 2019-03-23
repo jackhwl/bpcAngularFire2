@@ -20,6 +20,13 @@ export class MenuAdminComponent implements OnInit {
     formDisplay: boolean = true;
     singleMenu: Menu;
     parentId: string;
+    editorStyle = {
+        height: '200px',
+        //width: '90vw',
+        backgroundColor: '#fff'
+    };
+    modules: any;
+    txtArea: HTMLTextAreaElement;
 
     constructor(private userSVC: UserService, private router: Router, private menuSVC: MenuService, private menuAdminSVC: MenuAdminService, private fb: FormBuilder){}
 
@@ -45,7 +52,8 @@ export class MenuAdminComponent implements OnInit {
             editContent: '',
             editOrder: '',
             editEnable: ''
-        })
+        });
+        this.modules = this.menuAdminSVC.getEditorModules();
         this.theUser = this.userSVC.loggedInUser;
         this.getNav();
     }
