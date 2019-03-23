@@ -5,40 +5,42 @@
     </div>
 </div>
 
-<form>
+<form [formGroup]="editorForm">
     <div class="row">
         <div class="small-12 medium-6 columns">
             <label>Menu Name
-                <input type="text" [(ngModel)]="name" name="name" required #navName="ngModel">
+                <input type="text" formControlName="name" required>
             </label>
         </div>
     </div>                
     <div class="row">
         <div class="small-12 columns">
             <label>Menu Content
-                <textarea rows="15" cols="100" [(ngModel)]="content" name="content" #psContent="ngModel"></textarea>
+                    <quill-editor [style]="editorStyle" [modules]="modules" (onContentChanged)="maxLength($event)"
+                    (onEditorCreated)="editorCreated($event)" formControlName="content"></quill-editor>
+                <!-- <textarea rows="15" cols="100" [(ngModel)]="content" name="content" #psContent="ngModel"></textarea> -->
             </label>
         </div>
     </div>
     <div class="row">
         <div class="small-12 medium-6 columns">
             <label>Order
-                <input type="number" [(ngModel)]="order" name="order" required #navOrder="ngModel">
+                <input type="number" formControlName="order" required>
             </label>
         </div>
     </div>
     <div class="row">
         <div class="small-12 medium-6 columns">
             <label>Enable
-                <input type="radio" name="enable" [(ngModel)]="enable" [value]="true"> True
-                <input type="radio" name="enable" [(ngModel)]="enable" [value]="false"> False
+                <input type="radio"  formControlName="enable" value="true"> True
+                <input type="radio" formControlName="enable" value="false"> False
             </label>
         </div>
     </div>
     <div class="row align-center">
         <div class="small-12 columns">
             <div class="expanded button-group">
-                <button class="success button" type="button" [disabled]="!navName.valid"
+                <button class="success button" type="button" disabled0="!navName.valid"
                     (click)="createMenu()">Create Menu</button>
                 <button class="cancel button" type="button" (click)="cancel()">Cancel</button>
             </div>
