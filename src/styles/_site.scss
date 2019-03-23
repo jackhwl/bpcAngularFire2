@@ -414,7 +414,19 @@ input, select, textarea {
     content: "<>";
   }
 
-
+.is-invalid {
+    border-color: #dc3545;
+}
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
 /*Responsive Styles*/
 @media only screen and (max-width: 1180px) {
     .site-header .wrap {

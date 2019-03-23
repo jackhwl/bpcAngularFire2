@@ -8,9 +8,12 @@
 <form [formGroup]="editorForm">
     <div class="row">
         <div class="small-12 medium-6 columns">
-            <label>Menu Name
-                <input type="text" formControlName="name" required>
-            </label>
+            <label>Menu Name</label>
+                <input type="text" formControlName="name" 
+                    [ngClass]="{'is-invalid': (editorForm.get('name').touched || editorForm.get('name').dirty) && !editorForm.get('name').valid }">
+                <span class="invalid-feedback">
+                    Please enter name
+                </span>
         </div>
     </div>                
     <div class="row">
@@ -24,9 +27,13 @@
     </div>
     <div class="row">
         <div class="small-12 medium-6 columns">
-            <label>Order
-                <input type="number" formControlName="order" required>
-            </label>
+            <label>Order</label>
+                <input type="number" formControlName="order"
+                [ngClass]="{'is-invalid': (editorForm.get('order').touched || editorForm.get('order').dirty) && !editorForm.get('order').valid }">
+                <span class="invalid-feedback">
+                    Please enter order
+                </span>
+
         </div>
     </div>
     <div class="row">
@@ -40,7 +47,7 @@
     <div class="row align-center">
         <div class="small-12 columns">
             <div class="expanded button-group">
-                <button class="success button" type="button" disabled0="!navName.valid"
+                <button class="success button" type="button" [disabled]="!editorForm.valid"
                     (click)="createMenu()">Create Menu</button>
                 <button class="cancel button" type="button" (click)="cancel()">Cancel</button>
             </div>

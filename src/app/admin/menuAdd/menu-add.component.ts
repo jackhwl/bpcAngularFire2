@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Menu } from '../../core/models/menu';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'add-menu',
@@ -42,9 +42,9 @@ export class MenuAddComponent implements OnInit{
         // console.log('this.parentId=');
         // console.log(this.parentId);
         this.editorForm = this.fb.group({
-            name: '',
+            name: ['', Validators.required],
             content: '',
-            order: '',
+            order: ['', Validators.required],
             enable: 'false'
         });
         this.modules = this.menuAdminSVC.getEditorModules();

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Menu } from '../../core/models';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     templateUrl: '/menu-admin.component.html',
@@ -48,9 +48,9 @@ export class MenuAdminComponent implements OnInit {
         //     editEnable: new FormControl()
         // });
         this.editorForm = this.fb.group({
-            name: '',
+            name: ['', Validators.required],
             content: '',
-            order: '',
+            order: ['', Validators.required],
             enable: ''
         });
         this.modules = this.menuAdminSVC.getEditorModules();
