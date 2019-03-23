@@ -87,8 +87,12 @@ export class MenuAdminComponent implements OnInit {
         this.formDisplay = true;
     }
 
-    updateMenu(single: Menu){
-        this.menuAdminSVC.editMenu(single);
+    updateMenu(){
+        this.singleMenu.name = this.editorForm.controls.editName.value;
+        this.singleMenu.order = this.editorForm.controls.editOrder.value;
+        this.singleMenu.enable = this.editorForm.controls.editEnable.value;
+        this.singleMenu.content = this.editorForm.controls.editContent.value;
+        this.menuAdminSVC.editMenu(this.singleMenu);
         this.formDisplay = true;
     }
 
