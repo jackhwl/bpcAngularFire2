@@ -15,7 +15,7 @@
 </div>
 
 <div>
-    <div [ngSwitch]="menuData.menuChoice">
+    <div [ngSwitch]="menuData.menuChoice" class="admin-content">
         <div *ngSwitchCase="'editSub'"><edit-menu [menuData]="menuData" [menu]="subMenu"></edit-menu></div>
         <div *ngSwitchDefault>
             <div *ngIf = "menuData.menuChoice==''" >

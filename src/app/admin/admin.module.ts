@@ -13,6 +13,8 @@ import { SignUpComponent } from './signUp/sign-up.component';
 import { UserService, AuthGuard, AuthService } from '../core/services';
 import { MenuAdminService } from './adminShared/menu-admin.service';
 
+import { MenuListComponent } from './menuList/menu-list.component';
+
 import { MenuAdminComponent } from './menuAdmin/menu-admin.component';
 import { MenuAddComponent } from './menuAdd/menu-add.component';
 import { MenuEditComponent } from './menuEdit/menu-edit.component';
@@ -28,6 +30,7 @@ const AdminRoutes: Routes = [
         path: 'admin',
         component: AdminComponent, 
         children: [
+            { path: 'menu-list', component: MenuListComponent, canActivate: [AuthGuard] },
             { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] },
             { path: 'sub-menu-admin', component: SubMenuAdminComponent, canActivate: [AuthGuard] },
             { path: 'menu-edit/:sub', component: MenuEditComponent, canActivate: [AuthGuard] },
@@ -56,6 +59,7 @@ const AdminRoutes: Routes = [
         AdminMenuComponent,
         LoginComponent,
         SignUpComponent,
+        MenuListComponent,
         MenuAdminComponent,
         MenuAddComponent,
         MenuEditComponent,
