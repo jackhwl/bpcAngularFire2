@@ -8,6 +8,10 @@
     </div>
     <div *ngSwitchCase="'addSub'">
         <add-menu parentId={{parentId}}></add-menu>
+        <select [(ngModel)]="selectedMenu" (change)="onChange($event.target.value)">
+            <option [value]="null">Select Top Menu</option>
+            <option *ngFor="let menu of nav" [value]="menu.id">{{menu.name}}</option>
+        </select>
     </div>
     <div *ngSwitchDefault>
         <div *ngIf="formDisplay" class="row">

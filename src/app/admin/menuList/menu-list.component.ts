@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, MenuService } from '../../core/services';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
 import { MenuAdminService } from '../adminShared/menu-admin.service';
 import { Menu } from '../../core/models';
@@ -28,7 +28,7 @@ export class MenuListComponent implements OnInit {
     modules: any;
     txtArea: HTMLTextAreaElement;
 
-    constructor(private userSVC: UserService, private router: Router, private menuSVC: MenuService, private menuAdminSVC: MenuAdminService, private fb: FormBuilder){}
+    constructor(private userSVC: UserService, private route: ActivatedRoute, private router: Router, private menuSVC: MenuService, private menuAdminSVC: MenuAdminService, private fb: FormBuilder){}
 
     logout(){
         this.userSVC.logout();
@@ -41,50 +41,12 @@ export class MenuListComponent implements OnInit {
     }
 
     ngOnInit(){
-        // this.editorForm = new FormGroup({
-        //     editName: new FormControl(),
-        //     editContent: new FormControl(),
-        //     editOrder: new FormControl(),
-        //     editEnable: new FormControl()
-        // });
-        this.editorForm = this.fb.group({
-            name: ['', Validators.required],
-            content: '',
-            order: ['', Validators.required],
-            enable: ''
-        });
-        this.modules = this.menuAdminSVC.getEditorModules();
+        const param = this.route.snapshot.paramMap.get('id');
+        if (param) {
+          const id = +param;
+        }
         this.theUser = this.userSVC.loggedInUser;
         this.getNav();
-    }
-
-    editorCreated(e) {
-        let quill = e;
-        this.txtArea = document.createElement('textarea');
-        this.txtArea.setAttribute('formControlName', 'content');
-        this.txtArea.style.cssText = "width: 100%;margin: 0px;background: rgb(29, 29, 29);box-sizing: border-box;color: rgb(204, 204, 204);font-size: 15px;outline: none;padding: 20px;line-height: 24px;font-family: Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace;position: absolute;top: 0;bottom: 0;border: none;display:none"
-
-        let htmlEditor = quill.addContainer('ql-custom');
-        htmlEditor.appendChild(this.txtArea);
-        this.txtArea.value = this.editorForm.controls.content.value;
-        let customButton = document.querySelector('.ql-showHtml');
-        customButton.addEventListener('click', () => {
-            if (this.txtArea.style.display === '') {
-                this.editorForm.controls.content.setValue(this.txtArea.value);
-                //quill.pasteHTML(html);
-            } else {
-                this.txtArea.value = this.editorForm.controls.content.value;
-            }
-            this.txtArea.style.display = this.txtArea.style.display === 'none' ? '' : 'none'
-        });
-    }
-
-    maxLength(e) {
-        // console.log(e);
-        // if(e.editor.getLength() > 10) {
-        //     e.editor.deleteText(10, e.editor.getLength());
-        // }
-
     }
 
     getNav(){
@@ -113,55 +75,24 @@ export class MenuListComponent implements OnInit {
         //     });
 
     }
-
-    editNav(theMenu: Menu) {
-        this.singleMenu = theMenu;
-        this.menuAdminSVC.setForm(this.singleMenu, this.editorForm);
-        this.formDisplay = false;
-    }
-
-    cancelEdit() {
-        this.formDisplay = true;
-    }
-
-    updateMenu(){
-        if (this.editorForm.valid) {
-            if (this.editorForm.dirty){
-                const menuItem = { ...this.singleMenu, ...this.editorForm.value};
-                console.log('menuItem=', menuItem);
-                console.log('this.singleMenu=', this.singleMenu);
-                console.log('this.editorForm.value=', this.editorForm.value);
-                this.menuAdminSVC.editMenu(menuItem);
-                this.formDisplay = true;
-                this.getNav();
-                this.onSaveComplete();
+    getSubNav(parentId: string){
+        let dbRef = firebase.database().ref('subMenu/').child(parentId).child('items').orderByChild('order');
+        dbRef.on('value', (snapshot) => {
+            if (snapshot.exists()){
+                let tmp: string[] = snapshot.val();
+                this.subNav = Object.keys(tmp).map(key => tmp[key]);
             } else {
-                this.onSaveComplete();
+                this.subNav = [];
             }
-        } else {
-            console.log('Please correct the validation errors.');
-        }
-        // this.singleMenu.name = this.editorForm.controls.editName.value;
-        // this.singleMenu.order = this.editorForm.controls.editOrder.value;
-        // this.singleMenu.enable = this.editorForm.controls.editEnable.value;
-        // this.singleMenu.content = this.editorForm.controls.editContent.value;
-        // this.menuAdminSVC.editMenu(this.menuItem);
-    }
+        });
+        //         dbRef.once('value')
+        //     .then((snapshot) => {
+        //         let tmp: string[] = [];
+        //         snapshot.forEach(function(childSnapshot){
+        //             tmp.push(childSnapshot.val());
+        //         })
+        //         this.subNav = Object.keys(tmp).map(key => tmp[key]);
+        // });
+    } 
 
-    deleteNav(single: Menu){
-        let verify = confirm(`Are you sure you want to delete this menu?`);
-        if (verify == true) {
-            this.menuAdminSVC.removeMenu(single);
-            this.router.navigate(['/admin/']);
-        } else {
-            alert('Nothing deleted!');
-        }
-    }
-
-    onSaveComplete(): void {
-        // Reset the form to clear the flags
-        console.log('onSaveComplete');
-        this.editorForm.reset();
-        //this.router.navigate(['/admin/menu-admin']);
-    }
 }
