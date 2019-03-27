@@ -3,14 +3,10 @@
         [routerLinkActiveOptions]="{exact: true}">Add Menu</a>
     <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Manage Menu</a>
-    <div *ngSwitchCase="'add'">
-        <add-menu></add-menu>
-    </div>
-    <div *ngSwitchCase="'addSub'">
-        <add-menu parentId={{parentId}}></add-menu>
+    <div>
         <select [(ngModel)]="selectedMenu" (change)="onChange($event.target.value)">
-            <option [value]="null">Select Top Menu</option>
-            <option *ngFor="let menu of nav" [value]="menu.id">{{menu.name}}</option>
+            <option [value]="0">Top Menu</option>
+            <option *ngFor="let menu of rootNav" [value]="menu.id">{{menu.name}}</option>
         </select>
     </div>
     <div *ngSwitchDefault>
@@ -28,7 +24,8 @@
                     <td>{{menu.enable}}</td>
                     <td>{{menu.order}}</td>
                     <!-- <td><a class="button" (click)="chooseMode('addSub', menu.id)">Add Sub Menu</a></td> -->
-                    <td><button class="btn btn-link" (click)="editNav(menu)">Edit</button></td>
+                    <td><a [routerLink]="['/admin/menu-edit', menu.id]">Edit</a>
+                        <button class="btn btn-link" (click)="editNav(menu)">Edit</button></td>
                     <td><button class="btn btn-link" (click)="deleteNav(menu)">Delete</button></td>
                 </tr>
             </table>
@@ -50,11 +47,11 @@
                         </div>
                     </div>
                 </div> -->
-            <div>
+            <!-- <div>
                 <div *ngFor="let subMenu of subNav">
                     <h4>{{subMenu.name}}</h4>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

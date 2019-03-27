@@ -15,6 +15,7 @@ export class MenuListComponent implements OnInit {
     editorForm: FormGroup;
     theUser: string;
     menuChoice: string;
+    rootNav: Menu[];
     nav: Menu[];
     subNav: Menu[];
     formDisplay: boolean = true;
@@ -46,7 +47,10 @@ export class MenuListComponent implements OnInit {
           const id = +param;
         }
         this.theUser = this.userSVC.loggedInUser;
-        this.getNav();
+        this.getSubNav('0');
+    }
+    onChange(id) {
+        this.getSubNav(id);
     }
 
     getNav(){
@@ -65,6 +69,7 @@ export class MenuListComponent implements OnInit {
                     tmp.push(childSnapshot.val());
                 })
                 this.nav = Object.keys(tmp).map(key => tmp[key]);
+                this.rootNav = Object.keys(tmp).map(key => tmp[key]);
         });
         // let key = this.nav[0].id;
         // let homeRef = dbRef.child(key);
@@ -76,15 +81,20 @@ export class MenuListComponent implements OnInit {
 
     }
     getSubNav(parentId: string){
-        let dbRef = firebase.database().ref('subMenu/').child(parentId).child('items').orderByChild('order');
-        dbRef.on('value', (snapshot) => {
-            if (snapshot.exists()){
-                let tmp: string[] = snapshot.val();
-                this.subNav = Object.keys(tmp).map(key => tmp[key]);
-            } else {
-                this.subNav = [];
-            }
-        });
+        if (parentId == '0') {
+            this.getNav();
+        } else {
+
+            let dbRef = firebase.database().ref('subMenu/').child(parentId).child('items').orderByChild('order');
+            dbRef.on('value', (snapshot) => {
+                if (snapshot.exists()){
+                    let tmp: string[] = snapshot.val();
+                    this.nav = Object.keys(tmp).map(key => tmp[key]);
+                } else {
+                    this.nav = [];
+                }
+            });
+        }
         //         dbRef.once('value')
         //     .then((snapshot) => {
         //         let tmp: string[] = [];
