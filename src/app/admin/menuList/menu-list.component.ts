@@ -21,6 +21,7 @@ export class MenuListComponent implements OnInit {
     formDisplay: boolean = true;
     singleMenu: Menu;
     parentId: string;
+    selectedMenu: string;
     editorStyle = {
         height: '400px',
         //width: '90vw',
@@ -44,13 +45,21 @@ export class MenuListComponent implements OnInit {
     ngOnInit(){
         const param = this.route.snapshot.paramMap.get('id');
         if (param) {
-          const id = +param;
+            this.selectedMenu = param;
+        } else {
+            this.selectedMenu = "0";
         }
+        console.log('selectedMenu=', this.selectedMenu)
+        this.getSubNav(this.selectedMenu);
         this.theUser = this.userSVC.loggedInUser;
-        this.getSubNav('0');
     }
     onChange(id) {
-        this.getSubNav(id);
+        if (id === "0") {
+            this.router.navigate(['/admin/menu-list']);
+        } else {
+            this.router.navigate(['/admin/menu-list/' + encodeURIComponent(id)]);
+        }
+        //this.getSubNav(id);
     }
 
     getNav(){

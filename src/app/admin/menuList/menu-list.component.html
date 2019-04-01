@@ -6,7 +6,7 @@
     <div>
         <select [(ngModel)]="selectedMenu" (change)="onChange($event.target.value)">
             <option [value]="0">Top Menu</option>
-            <option *ngFor="let menu of rootNav" [value]="menu.id">{{menu.name}}</option>
+            <option *ngFor="let menu of rootNav" [value]="menu.id" [selected]="selected">{{menu.name}}</option>
         </select>
     </div>
     <div *ngSwitchDefault>
@@ -43,7 +43,7 @@
                                     <a class="button alert" (click)="deleteNav(menu)">Delete</a>
                                 </div>
                             </div>
-    
+
                         </div>
                     </div>
                 </div> -->

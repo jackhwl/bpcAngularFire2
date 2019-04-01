@@ -177,7 +177,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AngularClass/angular-starter.git"
+    "url": "git+https://github.com/AngularClass/angular-starter.git"
   },
   "bugs": {
     "url": "https://github.com/AngularClass/angular-starter/issues"
@@ -185,5 +185,6 @@
   "engines": {
     "node": ">= 4.2.1",
     "npm": ">= 3"
-  }
+  },
+  "main": "karma.conf.js"
 }

@@ -73,18 +73,24 @@ export class SubMenuAdminComponent implements OnInit {
         //         })
         //         this.subNav = Object.keys(tmp).map(key => tmp[key]);
         // });
-    } 
+    }
     addNav() {
         this.menuChoice = 'editSub';
         this.parentId = this.selectedMenu;
-        this.subMenu = new Menu (
-            '',
-            1,
-            false
-        );
+        // this.subMenu = new Menu (
+        //     '',
+        //     1,
+        //     false
+        // );
+        this.subMenu = {
+            name: '',
+            content: '',
+            order: 1,
+            enable: false
+        };
         this.menuData.parentId =  this.parentId;
         this.menuData.menuChoice = this.menuChoice;
-        this.menuData.addMode = true;        
+        this.menuData.addMode = true;
     }
     editNav(menu: Menu) {
         let dbRef = firebase.database().ref('content/').child(menu.id);
@@ -102,14 +108,15 @@ export class SubMenuAdminComponent implements OnInit {
 
         this.menuData.parentId =  this.parentId;
         this.menuData.menuChoice = this.menuChoice;
-        this.menuData.addMode = false;        
+        this.menuData.addMode = false;
 
     }
 
     deleteNav(menu: Menu){
         let verify = confirm(`Are you sure you want to delete this menu?`);
         if (verify == true) {
+          this.parentId = this.selectedMenu;
             this.menuAdminSVC.removeSubMenu(this.parentId, menu);
-        } 
+        }
     }
 }
