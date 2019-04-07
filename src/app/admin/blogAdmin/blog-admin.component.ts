@@ -3,7 +3,7 @@ import { UserService } from '../../core/services';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { BlogAdminService } from '../adminShared/blog-admin.service';
-import { Blog } from '../adminShared/blog';
+import { Blog } from 'src/app/core/models';
 
 @Component({
     templateUrl: '/blog-admin.component.html',
@@ -60,7 +60,7 @@ export class BlogAdminComponent implements OnInit {
         let verify = confirm(`Are you sure you want to delete this post?`);
         if (verify == true) {
             this.blogAdminSVC.removePost(single);
-            this.router.navigate(['/admin/']);
+            this.router.navigate(['/blog-admin/']);
         } else {
             alert('Nothing deleted!');
         }

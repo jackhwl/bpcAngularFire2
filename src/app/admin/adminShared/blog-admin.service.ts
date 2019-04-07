@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Blog } from './blog';
+import { Blog } from 'src/app/core/models';
 
 @Injectable()
 
@@ -44,19 +44,19 @@ export class BlogAdminService {
                 title: update.title,
                 content: update.content
             });
-        alert('post updated');
+        //alert('post updated');
     }
 
     removePost(deletePost: Blog) {
         let dbRef = firebase.database().ref('blogPosts/').child(deletePost.id).remove();
-        alert('post deleted');
+        console.log('post deleted');
         if (deletePost.imgTitle) {
           let imageRef = firebase.storage().ref().child(`images/${deletePost.imgTitle}`)
               .delete()
                   .then(function() {
-                      alert(`${deletePost.imgTitle} was deleted from Storage`);
+                      console.log(`${deletePost.imgTitle} was deleted from Storage`);
                   }).catch(function(error) {
-                      alert(`Error -Unable to delete ${deletePost.imgTitle}`);
+                      console.log(`Error -Unable to delete ${deletePost.imgTitle}`);
                   });
         }
     }

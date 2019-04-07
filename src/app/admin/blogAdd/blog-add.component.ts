@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlogAdminService } from '../adminShared/blog-admin.service';
-import { Blog } from '../adminShared/blog';
+import { Blog } from 'src/app/core/models';
+
 
 @Component({
     selector: 'add-blog',
@@ -29,21 +30,18 @@ export class BlogAddComponent {
     }
 
     createPost() {
-        console.log('aaa');
-        this.post = new Blog (
-            this.postTitle,
-            this.content,
-            this.imgTitle,
-            this.imageSRC ? this.imageSRC.substring(23) : null
-        );
-        console.log('bbb=', this.post);
+        this.post =  {
+          title:  this.postTitle,
+          content:  this.content,
+          imgTitle:  this.imgTitle,
+          img:  this.imageSRC ? this.imageSRC.substring(23) : null
+        };
         this.blogAdminSVC.createPost(this.post);
-        console.log('ccc');
-        alert(`${this.postTitle} added to posts`);
-        this.router.navigate(['/admin']);
+        //alert(`${this.postTitle} added to posts`);
+        this.router.navigate(['/blog-admin']);
     }
 
     cancel() {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/blog-admin']);
     }
 }

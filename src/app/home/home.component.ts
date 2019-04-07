@@ -3,8 +3,8 @@ import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 //import * as firebase from 'firebase';
 // import { Blog } from '../admin/adminShared/blog';
-import { EnvService, UserService, MenuService } from '../core/services';
-import { Menu } from '../core/models/menu';
+import { EnvService, UserService, MenuService, BlogService } from '../core/services';
+import { Menu, Blog } from '../core/models';
 
 //import { AppState } from '../app.service';
 // import { Title } from './title';
@@ -50,26 +50,27 @@ export class HomeComponent implements OnInit {
   /**
    * TypeScript public modifiers
    */
-  constructor(private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
+  constructor(private userSVC: UserService, private menuSVC: MenuService, private blogSVC: BlogService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
 
   public ngOnInit() {
+    this.blogSVC.setBlog();
     this.menuSVC.setTopNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getMisc();
   }
 
 //   changeSubRoute(menu) {
-//     //this._LoaderService.show(); 
+//     //this._LoaderService.show();
 //     //this will start the loader service.
 //     //console.log(menu);
 //     this.menuSVC.currentSubMenu = menu;
 //     this.getContent(menu);
-//     this.router.navigate(['/' + this.menuSVC.currentMenu.name.replace(' ', '-'), menu.name.replace(' ', '-')]); 
-    
+//     this.router.navigate(['/' + this.menuSVC.currentMenu.name.replace(' ', '-'), menu.name.replace(' ', '-')]);
+
 //     // you have to check this out by passing required route value.
 //     // this line will redirect you to your destination. By reaching to destination you can close your loader service.
 //     // please note this implementation may vary according to your routing code.
- 
+
 //  }
 
 //  getContent(menu){
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit {
 //               //console.log(this.menuSVC.currentSubMenu);
 //       });
 //   }
-// } 
+// }
 
   // public submitState(value: string) {
   //   console.log('hello2 `Home` component:' +  this.menu);

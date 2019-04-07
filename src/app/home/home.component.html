@@ -58,25 +58,8 @@
         <div class="widget-wrap">
           <h4 class="widget-title widgettitle">Recent Posts</h4>
           <ul>
-            <li>
-              <a href="https://demo.studiopress.com/outreach/threaded-comments/">Sample Post With
-                Threaded Comments</a>
-            </li>
-            <li>
-              <a href="https://demo.studiopress.com/outreach/image-aligned-left/">Sample Post With
-                Image Aligned Left</a>
-            </li>
-            <li>
-              <a href="https://demo.studiopress.com/outreach/image-aligned-right/">Sample Post
-                With Image Aligned Right</a>
-            </li>
-            <li>
-              <a href="https://demo.studiopress.com/outreach/image-centered/">Sample Post With
-                Image Centered</a>
-            </li>
-            <li>
-              <a href="https://demo.studiopress.com/outreach/unordered-list/">Sample Post With an
-                Unordered List</a>
+            <li *ngFor="let post of blogSVC.blogs">
+              <a href="https://demo.studiopress.com/outreach/threaded-comments/">{{post.title}}</a>
             </li>
           </ul>
         </div>

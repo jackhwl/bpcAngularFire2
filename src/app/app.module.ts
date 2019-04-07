@@ -7,7 +7,7 @@ import { RouterModule, PreloadAllModules} from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
-// // for auth    
+// // for auth
  import {AngularFireAuthModule} from 'angularfire2/auth';
 // // for database
 import {AngularFireDatabaseModule} from 'angularfire2/database';
@@ -55,7 +55,7 @@ import '../styles/headings.css';
 
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
-import { EnvService, MenuService, AuthGuard, AuthService } from './core/services';
+import { EnvService, MenuService, AuthGuard, AuthService, BlogService } from './core/services';
 import { EffectsModule } from '@ngrx/effects';
 import { miscReducer } from './reducers/misc.reducer';
 import { MiscEffects } from './effects/misc.effects';
@@ -120,6 +120,7 @@ type StoreType = {
     APP_PROVIDERS,
     EnvService,
     MenuService,
+    BlogService,
     AuthGuard,
     AuthService
   ]

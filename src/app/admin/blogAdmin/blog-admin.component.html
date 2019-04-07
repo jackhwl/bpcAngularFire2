@@ -21,9 +21,25 @@
     <div *ngSwitchCase="'add'"><add-blog></add-blog></div>
     <div *ngSwitchDefault>
         <div *ngIf = "formDisplay" class="row">
-            <div class="row" *ngFor="let posts of blogPosts">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Content</th>
+                        <th>Order</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr *ngFor="let post of blogPosts">
+                        <td>{{post.title}}</td>
+                        <td>{{post.content | truncate:20}}</td>
+                        <td></td>
+                        <!-- <td><a class="button" (click)="chooseMode('addSub', menu.id)">Add Sub Menu</a></td> -->
+                        <td><button class="btn btn-link" (click)="editPost(post)">Edit</button></td>
+                        <td><button class="btn btn-link" (click)="deletePost(post)">Delete</button></td>
+                    </tr>
+                </table>
 
-                <div class="row spacer">
+                <!-- <div class="row spacer">
                     <div class="media-object">
                         <div *ngIf="posts.imgTitle" class="media-object-section">
                             <div class="align-self-middle">
@@ -40,9 +56,8 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
-            </div>
         </div>
 
         <div *ngIf="!formDisplay" class="row">
