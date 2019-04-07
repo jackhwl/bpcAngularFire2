@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div [ngSwitch]="menuChoice">
+<div [ngSwitch]="menuChoice" class="admin-content">
     <a class="btn btn-secondary" (click)="chooseMode('add')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Add Post</a>
     <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Blogs</a>
 

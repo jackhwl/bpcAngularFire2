@@ -29,13 +29,16 @@ export class BlogAddComponent {
     }
 
     createPost() {
+        console.log('aaa');
         this.post = new Blog (
             this.postTitle,
             this.content,
             this.imgTitle,
-            this.imageSRC.substring(23)
+            this.imageSRC ? this.imageSRC.substring(23) : null
         );
+        console.log('bbb=', this.post);
         this.blogAdminSVC.createPost(this.post);
+        console.log('ccc');
         alert(`${this.postTitle} added to posts`);
         this.router.navigate(['/admin']);
     }
