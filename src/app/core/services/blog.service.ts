@@ -26,13 +26,14 @@ export class BlogService {
         let dbRef = this.db.list('blogPosts', {query: {orderByChild: 'title'}}).$ref;
         dbRef.once('value')
             .then((snapshot) => {
-                let tmp: string[] = [];
-                snapshot.forEach(function(childSnapshot){
-                    let item = childSnapshot.val();
-                    if (item.enable) tmp.push(childSnapshot.val());
-                })
-                this.blogs = Object.keys(tmp).map(key => tmp[key]);
-        });
+              let tmp: string[] = [];
+              snapshot.forEach(function(childSnapshot){
+                  let item = childSnapshot.val();
+                  //if (item.enable)
+                  tmp.push(childSnapshot.val());
+              });
+              this.blogs = Object.keys(tmp).map(key => tmp[key]);
+            });
     }
 }
   // getPosts() {
