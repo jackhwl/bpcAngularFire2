@@ -1,22 +1,23 @@
-<div class="top-bar">
-    <div class="top-bar-title">BPC Admin area</div>
-
-    <div class="top-bar-left">
+<div class="admin-content">
+    <!-- <div class="top-bar-left">
         <ul class="menu">
             <li class="admin-menu"><a (click)="chooseMode('add')">Add Post</a></li>
             <li *ngIf = "menuChoice" class="admin-menu"><a (click)="chooseMode('')">Manage Blogs</a></li>
             <li class="admin-menu"><a [routerLink]="['/admin']">Back to Admin</a></li>
         </ul>
-    </div>
+    </div> -->
     <div *ngIf="theUser" class="top-bar-right">
         <ul class="menu">
             <li class="admin-menu"><a (click)="logout()">Logout</a></li>
             <li class="admin-menu"><a> {{theUser}} Logged in</a></li>
         </ul>
     </div>
-</div>>
+</div>
 
 <div [ngSwitch]="menuChoice">
+    <a class="btn btn-secondary" (click)="chooseMode('add')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Add Post</a>
+    <a class="btn btn-secondary" (click)="chooseMode('')" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">Manage Blogs</a>
+
     <div *ngSwitchCase="'add'"><add-blog></add-blog></div>
     <div *ngSwitchDefault>
         <div *ngIf = "formDisplay" class="row">

@@ -12,6 +12,7 @@ import { SignUpComponent } from './signUp/sign-up.component';
 
 import { UserService, AuthGuard, AuthService } from '../core/services';
 import { MenuAdminService } from './adminShared/menu-admin.service';
+import { BlogAdminService } from './adminShared/blog-admin.service';
 
 import { MenuListComponent } from './menuList/menu-list.component';
 
@@ -19,6 +20,9 @@ import { MenuAdminComponent } from './menuAdmin/menu-admin.component';
 import { MenuAddComponent } from './menuAdd/menu-add.component';
 import { MenuEditComponent } from './menuEdit/menu-edit.component';
 import { SubMenuAdminComponent } from './subMenuAdmin/sub-menu-admin.component';
+
+import { BlogAdminComponent } from './blogAdmin/blog-admin.component';
+import { BlogAddComponent } from './blogAdd/blog-add.component';
 
 import { TruncatePipe } from './adminShared/trunc.pipe';
 
@@ -28,10 +32,11 @@ import { TruncatePipe } from './adminShared/trunc.pipe';
 const AdminRoutes: Routes = [
     {
         path: 'admin',
-        component: AdminComponent, 
+        component: AdminComponent,
         children: [
             { path: 'menu-list', component: MenuListComponent, canActivate: [AuthGuard] },
             { path: 'menu-list/:id', component: MenuListComponent, canActivate: [AuthGuard] },
+            { path: 'blog-admin', component: BlogAdminComponent, canActivate: [AuthGuard] },
             { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] },
             { path: 'sub-menu-admin', component: SubMenuAdminComponent, canActivate: [AuthGuard] },
             { path: 'menu-edit/:sub', component: MenuEditComponent, canActivate: [AuthGuard] },
@@ -65,11 +70,14 @@ const AdminRoutes: Routes = [
         MenuAddComponent,
         MenuEditComponent,
         SubMenuAdminComponent,
+        BlogAdminComponent,
+        BlogAddComponent,
         TruncatePipe
     ],
     providers: [
         UserService,
         MenuAdminService,
+        BlogAdminService,
         AuthGuard,
         AuthService
     ]

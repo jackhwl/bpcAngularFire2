@@ -8,7 +8,7 @@
             <li class="admin-menu"><a [routerLink]="['/admin/sub-menu-admin']">Manage Sub Menu</a></li>
             <li class="admin-menu"><a href="#">Two</a></li>
         </ul>
-    </div> 
+    </div>
     <div *ngIf="theUser" class="top-bar-right">
         <ul class="menu">
             <li class="admin-menu">
@@ -32,7 +32,9 @@
         Header</a>
     <a (click)="chooseMode('footer')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage
         Footer</a>
-</div>
+    <a [routerLink]="['/admin/blog-admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Manage
+      Blog</a>
+  </div>
 <div *ngIf="headerChoice" class="admin-content">
     <form [formGroup]="editorForm">
         <div>
