@@ -25,7 +25,7 @@
 
                 <div class="row spacer">
                     <div class="media-object">
-                        <div class="media-object-section">
+                        <div *ngIf="posts.imgTitle" class="media-object-section">
                             <div class="align-self-middle">
                                 <img class="mini-img" [src]="posts.img">
                             </div>
@@ -65,9 +65,9 @@
                                 name="editContent" required #psContent="ngModel"></textarea>
                         </label>
                     </div>
-                    <div class="small-12 medium-6 columns">
+                    <!-- <div class="small-12 medium-6 columns">
                         <img [src] = "singlePost.img" alt="Image preview...">
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row align-center">

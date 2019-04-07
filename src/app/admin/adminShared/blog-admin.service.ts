@@ -7,8 +7,6 @@ import { Blog } from './blog';
 export class BlogAdminService {
     createPost(post: Blog){
         if (post.img) {
-          console.log(post);
-          console.log('ddd111');
           let storageRef = firebase.storage().ref();
           storageRef.child(`images/${post.imgTitle}`).putString(post.img, 'base64')
               .then((snapshot) => {
@@ -27,14 +25,12 @@ export class BlogAdminService {
                   alert(`failed upload: ${error}`);
               });
         } else {
-          console.log('ddd111');
-                    let dbRef = firebase.database().ref('blogPosts/');
+          let dbRef = firebase.database().ref('blogPosts/');
           let newPost = dbRef.push();
-          console.log('ddd');
           newPost.set ({
               title: post.title,
               content: post.content,
-              imgTitle: post.imgTitle,
+              imgTitle: null,
               img: null,
               id: newPost.key
           });
@@ -54,12 +50,14 @@ export class BlogAdminService {
     removePost(deletePost: Blog) {
         let dbRef = firebase.database().ref('blogPosts/').child(deletePost.id).remove();
         alert('post deleted');
-        let imageRef = firebase.storage().ref().child(`images/${deletePost.imgTitle}`)
-            .delete()
-                .then(function() {
-                    alert(`${deletePost.imgTitle} was deleted from Storage`);
-                }).catch(function(error) {
-                    alert(`Error -Unable to delete ${deletePost.imgTitle}`);
-                });
+        if (deletePost.imgTitle) {
+          let imageRef = firebase.storage().ref().child(`images/${deletePost.imgTitle}`)
+              .delete()
+                  .then(function() {
+                      alert(`${deletePost.imgTitle} was deleted from Storage`);
+                  }).catch(function(error) {
+                      alert(`Error -Unable to delete ${deletePost.imgTitle}`);
+                  });
+        }
     }
 }
