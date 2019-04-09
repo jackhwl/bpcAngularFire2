@@ -13,6 +13,7 @@ export class BlogAddComponent {
     imgTitle: string;
     imageSRC: string;
     postTitle: string;
+    postAuthor: string;
     content: string;
     post: Blog;
 
@@ -34,6 +35,7 @@ export class BlogAddComponent {
           title:  this.postTitle,
           content:  this.content,
           imgTitle:  this.imgTitle,
+          author: this.postAuthor,
           img:  this.imageSRC ? this.imageSRC.substring(23) : null
         };
         this.blogAdminSVC.createPost(this.post);

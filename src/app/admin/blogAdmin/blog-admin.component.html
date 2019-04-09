@@ -75,6 +75,14 @@
                 </div>
                 <div class="row">
                     <div class="small-12 medium-6 columns">
+                        <label>Post Author
+                            <input type="text" [(ngModel)]="singlePost.author"
+                                name="editAuthor" required #psTitle="ngModel">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 medium-6 columns">
                         <label>Post Content
                             <textarea rows="15" id="content" [(ngModel)]="singlePost.content"
                                 name="editContent" required #psContent="ngModel"></textarea>

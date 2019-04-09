@@ -15,6 +15,7 @@ export class BlogAdminService {
                   let newPost = dbRef.push();
                   newPost.set ({
                       title: post.title,
+                      author: post.author,
                       content: post.content,
                       imgTitle: post.imgTitle,
                       img: url,
@@ -29,6 +30,7 @@ export class BlogAdminService {
           let newPost = dbRef.push();
           newPost.set ({
               title: post.title,
+              author: post.author,
               content: post.content,
               imgTitle: null,
               img: null,
@@ -42,7 +44,9 @@ export class BlogAdminService {
         let dbRef = firebase.database().ref('blogPosts/').child(update.id)
             .update({
                 title: update.title,
+                author: update.author,
                 content: update.content
+
             });
         //alert('post updated');
     }

@@ -14,6 +14,13 @@
     </div>
     <div class="row">
         <div class="small-12 medium-6 columns">
+            <label>Post Author
+                <input type="text" [(ngModel)]="postAuthor" name="postAuthor" required #psAuthor="ngModel">
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-6 columns">
             <label>Post Content
                 <textarea rows="15" id="content" [(ngModel)]="content" name="content" required #psContent="ngModel"></textarea>
             </label>

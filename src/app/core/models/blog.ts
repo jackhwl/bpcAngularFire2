@@ -1,6 +1,9 @@
+import { AuthenticationService } from '../services';
+
 export interface Blog {
   title: string,
   content: string,
+  author: string,
   imgTitle?: string,
   img?: any,
   id?: string
