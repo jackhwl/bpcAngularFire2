@@ -115,6 +115,6 @@ export class BlogAddComponent {
     onSaveComplete(): void {
       // Reset the form to clear the flags
       console.log('onSaveComplete');
-      this.router.navigate(['/blog-admin']);
+      this.router.navigate(['/admin/blog-admin']);
     }
   }

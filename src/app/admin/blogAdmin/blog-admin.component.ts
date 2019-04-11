@@ -88,14 +88,17 @@ export class BlogAdminComponent implements OnInit {
     }
 
     editPost(thePost: Blog) {
+      console.log('aaa');
         this.singlePost = thePost;
         //this.blogAdminSVC.setForm(this.singlePost, this.editorForm);
+        console.log('aaa2');
         this.editorForm.setValue({
           title: thePost.title,
-          author: thePost.author,
+          author: thePost.author ? thePost.author : '',
           content: thePost.content,
           //enable: post.enable
         });
+        console.log('aaa3');
         this.formDisplay = false;
     }
 
@@ -138,6 +141,6 @@ export class BlogAdminComponent implements OnInit {
       // Reset the form to clear the flags
       console.log('onSaveComplete');
       this.editorForm.reset();
-      //this.router.navigate(['/admin/menu-admin']);
+      this.router.navigate(['/admin/blog-admin']);
     }
 }
