@@ -18,6 +18,10 @@ export class BlogAdminService {
                       title: post.title,
                       author: post.author,
                       content: post.content,
+                      order: post.order,
+                      enable: post.enable,
+                      createDate: new Date(),
+                      modifiedDate: new Date(),
                       imgTitle: post.imgTitle,
                       img: url,
                       id: newPost.key
@@ -33,8 +37,12 @@ export class BlogAdminService {
               title: post.title,
               author: post.author,
               content: post.content,
+              order: post.order,
+              enable: post.enable,
               imgTitle: null,
               img: null,
+              createDate: new Date(),
+              modifiedDate: new Date(),
               id: newPost.key
           });
 
@@ -46,8 +54,10 @@ export class BlogAdminService {
             .update({
                 title: update.title,
                 author: update.author,
-                content: update.content
-
+                content: update.content,
+                order: update.order,
+                enable: update.enable,
+                modifiedDate: new Date(),
             });
         //alert('post updated');
     }

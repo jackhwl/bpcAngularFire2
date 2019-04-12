@@ -33,6 +33,8 @@ export class BlogAddComponent {
       this.editorForm = this.fb.group({
         title: ['', Validators.required],
         author: '',
+        order: 100,
+        enable: false,
         content: ['', Validators.required],
         //enable: ''
       });

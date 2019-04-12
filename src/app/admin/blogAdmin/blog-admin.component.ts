@@ -41,8 +41,9 @@ export class BlogAdminComponent implements OnInit {
       this.editorForm = this.fb.group({
         title: ['', Validators.required],
         author: '',
+        order: 100,
+        enable: false,
         content: ['', Validators.required],
-        //enable: ''
       });
       this.modules = this.blogAdminSVC.getEditorModules();
       this.theUser = this.userSVC.loggedInUser;
@@ -96,7 +97,8 @@ export class BlogAdminComponent implements OnInit {
           title: thePost.title,
           author: thePost.author ? thePost.author : '',
           content: thePost.content,
-          //enable: post.enable
+          enable: thePost.enable !== null ? thePost.enable : true,
+          order: thePost.order ? thePost.order : 100
         });
         console.log('aaa3');
         this.formDisplay = false;
