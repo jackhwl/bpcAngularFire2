@@ -23,14 +23,16 @@ export class BlogService {
   setBlog(){
     if (!this.blogs) {
         //let dbRef = this.menu$.$ref.orderByChild('order');
-        let dbRef = this.db.list('blogPosts', {query: {orderByChild: 'title'}}).$ref;
+        let dbRef = this.db.list('blogPosts', {query: {orderByChild: 'order'}}).$ref;
+        //.filter(subMenuKey => subMenuKey.name.toLowerCase() === 'join us').$ref;
         dbRef.once('value')
             .then((snapshot) => {
               let tmp: string[] = [];
               snapshot.forEach(function(childSnapshot){
                   let item = childSnapshot.val();
-                  //if (item.enable)
-                  tmp.push(childSnapshot.val());
+                  if (item.enable) {
+                    tmp.push(childSnapshot.val());
+                  }
               });
               this.blogs = Object.keys(tmp).map(key => tmp[key]);
             });

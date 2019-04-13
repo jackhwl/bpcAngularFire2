@@ -42,7 +42,7 @@ export class BlogAdminComponent implements OnInit {
         title: ['', Validators.required],
         author: '',
         order: 100,
-        enable: 'false',
+        enable: false,
         content: ['', Validators.required],
       });
       this.modules = this.blogAdminSVC.getEditorModules();
@@ -84,23 +84,20 @@ export class BlogAdminComponent implements OnInit {
         dbRef.once('value')
             .then((snapshot) => {
                 let tmp: string[] = snapshot.val();
-                this.blogPosts = Object.keys(tmp).map(key => tmp[key])
+                this.blogPosts = Object.keys(tmp).map(key => tmp[key]);
             });
     }
 
     editPost(thePost: Blog) {
-      console.log('aaa');
         this.singlePost = thePost;
         //this.blogAdminSVC.setForm(this.singlePost, this.editorForm);
-        console.log('aaa2');
         this.editorForm.setValue({
           title: thePost.title,
           author: thePost.author ? thePost.author : '',
           content: thePost.content,
-          enable: (thePost.enable === undefined || thePost.enable === null) ? 'true' : thePost.enable.toString(),
+          enable: (thePost.enable === undefined || thePost.enable === null) ? true : thePost.enable,
           order: thePost.order ? thePost.order : 100
         });
-        console.log('aaa3=', this.editorForm);
         this.formDisplay = false;
     }
 
@@ -112,9 +109,6 @@ export class BlogAdminComponent implements OnInit {
       if (this.editorForm.valid) {
         if (this.editorForm.dirty){
             const postItem = { ...this.singlePost, ...this.editorForm.value};
-            console.log('postItem=', postItem);
-            console.log('this.singlePost=', this.singlePost);
-            console.log('this.editorForm.value=', this.editorForm.value);
             this.blogAdminSVC.editPost(postItem);
             this.formDisplay = true;
             this.getPosts();

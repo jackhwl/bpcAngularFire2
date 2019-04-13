@@ -26,13 +26,15 @@
                         <th>Name</th>
                         <th>Content</th>
                         <th>Order</th>
+                        <th>Enable</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr *ngFor="let post of blogPosts">
                         <td>{{post.title}}</td>
                         <td>{{post.content | truncate:20}}</td>
-                        <td></td>
+                        <td>{{post.order}}</td>
+                        <td>{{post.enable}}</td>
                         <!-- <td><a class="button" (click)="chooseMode('addSub', menu.id)">Add Sub Menu</a></td> -->
                         <td><button class="btn btn-link" (click)="editPost(post)">Edit</button></td>
                         <td><button class="btn btn-link" (click)="deletePost(post)">Delete</button></td>
@@ -103,9 +105,9 @@
                 <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Enable
-                            <input type="radio" formControlName="enable" value="true"> True
-                            <input type="radio" formControlName="enable" value="false"> False
-                </label>
+                            <input type="radio" formControlName="enable" [value]=true> True
+                            <input type="radio" formControlName="enable" [value]=false> False
+                        </label>
                     </div>
                 </div>
 
