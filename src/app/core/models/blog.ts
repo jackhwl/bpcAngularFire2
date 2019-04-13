@@ -5,7 +5,7 @@ export interface Blog {
   content: string,
   author: string,
   order: number,
-  enable: boolean,
+  enable?: boolean,
   createDate: Date,
   modifiedDate: Date,
   imgTitle?: string,

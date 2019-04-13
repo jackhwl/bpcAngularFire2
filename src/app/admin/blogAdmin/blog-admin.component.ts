@@ -42,7 +42,7 @@ export class BlogAdminComponent implements OnInit {
         title: ['', Validators.required],
         author: '',
         order: 100,
-        enable: false,
+        enable: 'false',
         content: ['', Validators.required],
       });
       this.modules = this.blogAdminSVC.getEditorModules();
@@ -97,10 +97,10 @@ export class BlogAdminComponent implements OnInit {
           title: thePost.title,
           author: thePost.author ? thePost.author : '',
           content: thePost.content,
-          enable: thePost.enable !== null ? thePost.enable : true,
+          enable: (thePost.enable === undefined || thePost.enable === null) ? 'true' : thePost.enable.toString(),
           order: thePost.order ? thePost.order : 100
         });
-        console.log('aaa3');
+        console.log('aaa3=', this.editorForm);
         this.formDisplay = false;
     }
 
