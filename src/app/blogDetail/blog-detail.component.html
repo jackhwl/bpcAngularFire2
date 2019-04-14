@@ -1,8 +1,8 @@
-<div class="row image-spacing">
+<!-- <div class="row image-spacing">
     <img [src]="singlePost?.img">
-</div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
     <div class="column text-left">
         <a class="back-link" [routerLink]="['']">
             <h4>Go Back</h4>
@@ -20,3 +20,25 @@
     <div class="column text-justified" [innerHTML]="singlePost?.content">
     </div>
 </div>
+-->
+<div class="site-inner">
+    <div class="wrap">
+      <main class="content">
+        <div class="breadcrumb">
+          You are here:
+          <span class="breadcrumb-link-wrap"><span>Blog</span></span>
+          <span>/</span>
+          {{singlePost?.title}}
+        </div>
+        <article class="entry">
+          <header class="entry-header">
+            <h1 class="entry-title">{{singlePost?.title}}</h1>
+          </header>
+          <div class="entry-content" [innerHTML]="sanitizer.bypassSecurityTrustHtml(singlePost?.content || '')">
+          </div>
+        </article>
+      </main>
+      <side-bar></side-bar>
+    </div>
+  </div>
+

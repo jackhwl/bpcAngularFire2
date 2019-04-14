@@ -28,7 +28,7 @@ import { InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { HeaderComponent } from './header';
 import { FooterComponent } from './footer';
-//import { BlogDetailComponent } from './blogDetail/blog-detail.component';
+import { BlogDetailComponent } from './blogDetail/blog-detail.component';
 import { AboutComponent } from './about';
 //import { WidgetComponent } from './widget';
 import { NoContentComponent } from './no-content';
@@ -86,7 +86,7 @@ type StoreType = {
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    //BlogDetailComponent,
+    BlogDetailComponent,
     //WidgetComponent,
     NoContentComponent,
     XLargeDirective

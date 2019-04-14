@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-  
-  
+
+
 import { NavComponent } from './nav';
+import { SideBarComponent } from './sidebar';
 import { SubNavComponent } from './subnav';
 
 @NgModule({
@@ -11,10 +12,10 @@ import { SubNavComponent } from './subnav';
         CommonModule, RouterModule
     ],
     exports: [
-        NavComponent, SubNavComponent
+        NavComponent, SubNavComponent, SideBarComponent
     ],
     declarations: [
-        NavComponent, SubNavComponent
+        NavComponent, SubNavComponent, SideBarComponent
     ],
     providers: [
     ]

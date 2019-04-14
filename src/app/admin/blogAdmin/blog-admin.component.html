@@ -24,7 +24,7 @@
                 <table>
                     <tr>
                         <th>Name</th>
-                        <th>Content</th>
+                        <th>Author</th>
                         <th>Order</th>
                         <th>Enable</th>
                         <th>&nbsp;</th>
@@ -32,7 +32,8 @@
                     </tr>
                     <tr *ngFor="let post of blogPosts">
                         <td>{{post.title}}</td>
-                        <td>{{post.content | truncate:20}}</td>
+                        <td>{{post.author}}</td>
+                        <!-- <td>{{post.content | truncate:20}}</td> -->
                         <td>{{post.order}}</td>
                         <td>{{post.enable}}</td>
                         <!-- <td><a class="button" (click)="chooseMode('addSub', menu.id)">Add Sub Menu</a></td> -->

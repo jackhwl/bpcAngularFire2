@@ -1,8 +1,10 @@
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import * as firebase from 'firebase';
-import { Blog } from '../admin/adminShared/blog';
+
 import { filter } from 'rxjs/operators';
+import { Blog } from '../core/models';
 
 @Component({
     selector: 'blog-detail',
@@ -10,31 +12,48 @@ import { filter } from 'rxjs/operators';
     styleUrls: ['./blog-detail.component.css']
 })
 
-export class BlogDetailComponent implements OnChanges {
+export class BlogDetailComponent implements OnInit, OnChanges {
     singlePost: Blog;
     postTitle: string;
-    @Input() id;
-    
-    constructor( private route: ActivatedRoute, private router: Router ){}
+    //@Input() id;
 
-    ngOnChanges(){
-        this.postTitle = this.id.replace('-', ' '); 
+    constructor( private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer ){}
+
+    ngOnInit(){
+      console.log('init');
+        this.postTitle = this.route.snapshot.params['title'].replace(/-/g, ' ');
         this.getSingle(this.postTitle);
     }
+    ngOnChanges(){
+      console.log('changed');
+      this.postTitle = this.route.snapshot.params['title'].replace(/-/g, ' ');
+      this.getSingle(this.postTitle);
+    }
 
-    getSingle(id: string){
+    getSingle(title: string){
+      console.log('title=',title);
         let dbRef = firebase.database().ref('blogPosts');
         dbRef.orderByChild('title')
-            .equalTo(id)
+            .equalTo(title)
             .once('value')
             .then((snapshot)=>{
                 let tmp = snapshot.val();
+                console.log('tmp=', tmp);
                 let transform = Object.keys(tmp).map(key => tmp[key]);
                 let title = transform[0].title;
                 let content = transform[0].content;
                 let imgTitle = transform[0].imgTitle;
                 let img = transform[0].img;
-                this.singlePost = new Blog(title, content, imgTitle, img);
+                let author = transform[0].author;
+                let enable = transform[0].enable;
+                let order = transform[0].order;
+                let createDate = transform[0].createDate;
+                let modifiedDate = transform[0].modifiedDate;
+
+                this.singlePost = {
+                  title,
+                   content, imgTitle, img, author, order, enable, createDate, modifiedDate
+                };
 
             })
     }

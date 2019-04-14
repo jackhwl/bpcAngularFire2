@@ -3,8 +3,8 @@ import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 //import * as firebase from 'firebase';
 // import { Blog } from '../admin/adminShared/blog';
-import { EnvService, UserService, MenuService, BlogService } from '../core/services';
-import { Menu, Blog } from '../core/models';
+import { EnvService, UserService, MenuService } from '../core/services';
+import { Menu } from '../core/models';
 
 //import { AppState } from '../app.service';
 // import { Title } from './title';
@@ -50,10 +50,9 @@ export class HomeComponent implements OnInit {
   /**
    * TypeScript public modifiers
    */
-  constructor(private userSVC: UserService, private menuSVC: MenuService, private blogSVC: BlogService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
+  constructor(private userSVC: UserService, private menuSVC: MenuService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
 
   public ngOnInit() {
-    this.blogSVC.setBlog();
     this.menuSVC.setTopNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getNav(this.route.snapshot.params['menu'], this.route.snapshot.params['sub']);
     this.menuSVC.getMisc();

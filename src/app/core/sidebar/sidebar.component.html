@@ -1,0 +1,75 @@
+<aside class="sidebar sidebar-primary">
+  <section class="widget featured-content">
+    <div class="widget-wrap">
+      <h4 class="widget-title widgettitle">WELCOME TO OUTREACH</h4>
+      <article>
+        <a href="#" class="alignnone" aria-hidden="true">
+          <img
+            width="300"
+            height="150"
+            src="img/hands-outstretched-300x150.jpg"
+            alt="Sample Message #1"
+            itemprop="image"
+          />
+        </a>
+        <header class="entry-header">
+          <h2 class="entry-title" itemprop="headline">
+            <a href="#">Sample Message #1</a>
+          </h2>
+          <p class="entry-meta">
+            <time
+              class="entry-time"
+              itemprop="datePublished"
+              datetime="2013-08-04T22:21:46+00:00"
+              >August 4, 2013</time
+            >
+            By
+            <span
+              class="entry-author"
+              itemprop="author"
+              itemscope
+              itemtype="https://schema.org/Person"
+              ><a
+                href="https://demo.studiopress.com/outreach/author/lmancke/"
+                class="entry-author-link"
+                itemprop="url"
+                rel="author"
+                ><span class="entry-author-name" itemprop="name"
+                  >Lauren Mancke</span
+                ></a
+              ></span
+            >
+            <span class="entry-comments-link"
+              ><a
+                href="https://demo.studiopress.com/outreach/sample-message-1/#respond"
+                >Leave a Comment</a
+              ></span
+            >
+          </p>
+        </header>
+        <div class="entry-content">
+          <p>
+            Join us for the first message in our new weekend series.
+            <a
+              href="https://demo.studiopress.com/outreach/sample-message-1/#more-487"
+              class="more-link"
+              >Read More</a
+            >
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="widget">
+    <div class="widget-wrap">
+      <h4 class="widget-title widgettitle">Recent Posts</h4>
+      <ul>
+        <li *ngFor="let blog of blogSVC.blogs">
+            <a (click)="changeRoute(blog)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+              {{blog.title}}
+            </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</aside>
