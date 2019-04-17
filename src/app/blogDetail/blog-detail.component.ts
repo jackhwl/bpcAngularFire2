@@ -17,12 +17,19 @@ export class BlogDetailComponent implements OnInit, OnChanges {
     postTitle: string;
     //@Input() id;
 
-    constructor( private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer ){}
-
-    ngOnInit(){
-      console.log('init');
+    constructor( private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer ){
+      route.params.subscribe(val => {
+        // put the code from `ngOnInit` here
+        //console.log('cons: init');
         this.postTitle = this.route.snapshot.params['title'].replace(/-/g, ' ');
         this.getSingle(this.postTitle);
+      });
+    }
+
+    ngOnInit(){
+      // console.log('init');
+      //   this.postTitle = this.route.snapshot.params['title'].replace(/-/g, ' ');
+      //   this.getSingle(this.postTitle);
     }
     ngOnChanges(){
       console.log('changed');
@@ -31,14 +38,14 @@ export class BlogDetailComponent implements OnInit, OnChanges {
     }
 
     getSingle(title: string){
-      console.log('title=',title);
+      //console.log('title=',title);
         let dbRef = firebase.database().ref('blogPosts');
         dbRef.orderByChild('title')
             .equalTo(title)
             .once('value')
             .then((snapshot)=>{
                 let tmp = snapshot.val();
-                console.log('tmp=', tmp);
+                //console.log('tmp=', tmp);
                 let transform = Object.keys(tmp).map(key => tmp[key]);
                 let title = transform[0].title;
                 let content = transform[0].content;
