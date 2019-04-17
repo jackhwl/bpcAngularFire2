@@ -3,11 +3,14 @@ import { HomeComponent } from './home';
 //import { AboutComponent } from './about';
 //import { WidgetComponent } from './widget';
 import { NoContentComponent } from './no-content';
-import { BlogDetailComponent } from './blogDetail/blog-detail.component';
+import { BlogDetailComponent } from './blogDetail/';
+import { BlogListComponent } from './blogs';
 
 import { DataResolver } from './app.resolver';
 
+
 export const ROUTES: Routes = [
+  { path: 'blogs/:page', component: BlogListComponent },
   { path: 'blog/:title', component: BlogDetailComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: ':menu',  component: HomeComponent },
