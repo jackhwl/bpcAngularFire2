@@ -1,6 +1,32 @@
 bpc website use angularFire2 4.0
 test publick key again
 use node 8.13 version to avoid sass issue(in node 10)
+https://imagecompressor.com/
+
+https://peterscene.com/detecting-touch-devices-2018-update/
+/* smartphones, touchscreens */
+@media (hover: none) and (pointer: coarse) { ... }
+/* stylus-based screens */
+@media (hover: none) and (pointer: fine) { ... }
+/* Nintendo Wii controller, Kinect */
+@media (hover: hover) and (pointer: coarse) { ... }
+/* mouse, touch pad */
+@media (hover: hover) and (pointer: fine) { ... }
+
+http://www.stucox.com/blog/the-good-and-bad-of-level-4-media-queries/
+/* THESE ARE JUST TO ILLUSTRATE A POINT AND WON'T WORK WITH THE CURRENT SPEC! */
+@media (pointer:coarse) and (pointer:fine) {
+    /* both touchscreen and mouse connected */
+}
+@media (pointer:coarse) and not (pointer:fine) {
+    /* just touchscreen connected */
+}
+@media not (pointer:coarse) and (pointer:fine) {
+    /* just mouse connected */
+}
+@media (pointer:none) {
+    /* no pointer devices connected */
+}
 
 <p align="center">
   <a href="https://tipe.io/" target="_blank">
