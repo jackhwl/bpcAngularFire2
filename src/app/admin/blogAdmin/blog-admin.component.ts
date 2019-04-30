@@ -40,9 +40,11 @@ export class BlogAdminComponent implements OnInit {
     ngOnInit(){
       this.editorForm = this.fb.group({
         title: ['', Validators.required],
+        imgurl: '',
         author: '',
         order: 100,
         enable: false,
+        ontop: false,
         content: ['', Validators.required],
       });
       this.modules = this.blogAdminSVC.getEditorModules();
@@ -91,11 +93,14 @@ export class BlogAdminComponent implements OnInit {
     editPost(thePost: Blog) {
         this.singlePost = thePost;
         //this.blogAdminSVC.setForm(this.singlePost, this.editorForm);
+        //let imgurl = document.querySelector('.ql-showHtml');
         this.editorForm.setValue({
           title: thePost.title,
           author: thePost.author ? thePost.author : '',
+          imgurl: thePost.imgurl ? thePost.imgurl : '',
           content: thePost.content,
           enable: (thePost.enable === undefined || thePost.enable === null) ? true : thePost.enable,
+          ontop: (thePost.ontop === undefined || thePost.ontop === null) ? false : thePost.ontop,
           order: thePost.order ? thePost.order : 100
         });
         this.formDisplay = false;

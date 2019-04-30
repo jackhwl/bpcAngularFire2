@@ -17,9 +17,11 @@ export class BlogAdminService {
                   newPost.set ({
                       title: post.title,
                       author: post.author,
+                      imgurl: post.imgurl,
                       content: post.content,
                       order: post.order,
                       enable: post.enable,
+                      ontop: post.ontop,
                       createDate: new Date(),
                       modifiedDate: new Date(),
                       imgTitle: post.imgTitle,
@@ -36,9 +38,11 @@ export class BlogAdminService {
           newPost.set ({
               title: post.title,
               author: post.author,
+              imgurl: post.imgurl,
               content: post.content,
               order: post.order,
               enable: post.enable,
+              ontop: post.ontop,
               imgTitle: null,
               img: null,
               createDate: new Date(),
@@ -54,9 +58,11 @@ export class BlogAdminService {
             .update({
                 title: update.title,
                 author: update.author,
+                imgurl: update.imgurl,
                 content: update.content,
                 order: update.order,
                 enable: update.enable,
+                ontop: update.ontop,
                 modifiedDate: new Date(),
             });
         //alert('post updated');

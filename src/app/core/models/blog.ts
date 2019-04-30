@@ -6,8 +6,10 @@ export interface Blog {
   author: string,
   order: number,
   enable?: boolean,
+  ontop?: boolean,
   createDate: Date,
   modifiedDate: Date,
+  imgurl?: string,
   imgTitle?: string,
   img?: any,
   id?: string

@@ -27,6 +27,7 @@
                         <th>Author</th>
                         <th>Order</th>
                         <th>Enable</th>
+                        <th>Highlight</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -36,6 +37,7 @@
                         <!-- <td>{{post.content | truncate:20}}</td> -->
                         <td>{{post.order}}</td>
                         <td>{{post.enable}}</td>
+                        <td>{{post.ontop}}</td>
                         <!-- <td><a class="button" (click)="chooseMode('addSub', menu.id)">Add Sub Menu</a></td> -->
                         <td><button class="btn btn-link" (click)="editPost(post)">Edit</button></td>
                         <td><button class="btn btn-link" (click)="deletePost(post)">Delete</button></td>
@@ -83,6 +85,18 @@
                     </div>
                 </div>
                 <div class="row">
+                  <div class="small-12 medium-6 columns">
+                      <label>Post Image Link
+                          <input type="text" formControlName="imgurl" >
+                      </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="small-12 medium-6 columns">
+                        <img id='imgurl' >
+                </div>
+            </div>
+            <div class="row">
                     <div class="small-12 medium-6 columns">
                         <label>Post Content
                             <quill-editor [style]="editorStyle" [modules]="modules" (onContentChanged)="maxLength($event)"
@@ -109,6 +123,14 @@
                             <input type="radio" formControlName="enable" [value]=true> True
                             <input type="radio" formControlName="enable" [value]=false> False
                         </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 medium-6 columns">
+                        <label>Highlight
+                          <input type="radio" formControlName="ontop" [value]=true> True
+                          <input type="radio" formControlName="ontop" [value]=false> False
+                      </label>
                     </div>
                 </div>
 
