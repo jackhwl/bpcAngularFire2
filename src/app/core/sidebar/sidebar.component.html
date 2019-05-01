@@ -3,18 +3,19 @@
     <div class="widget-wrap">
       <h4 class="widget-title widgettitle">WELCOME TO OUTREACH</h4>
       <article>
+        <div *ngFor="let blog of blogSVC.hightlights">
         <a href="#" class="alignnone" aria-hidden="true">
           <img
             width="300"
             height="150"
-            src="img/hands-outstretched-300x150.jpg"
-            alt="Sample Message #1"
+            src="{{blog.imgurl}}"
+            alt="{{blog.title}}"
             itemprop="image"
           />
         </a>
         <header class="entry-header">
           <h2 class="entry-title" itemprop="headline">
-            <a href="#">Sample Message #1</a>
+            <a href="#">{{blog.title}}</a>
           </h2>
           <p class="entry-meta">
             <time
@@ -57,6 +58,7 @@
             >
           </p>
         </div>
+      </div>
       </article>
     </div>
   </section>

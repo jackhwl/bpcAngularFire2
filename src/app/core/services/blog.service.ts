@@ -8,6 +8,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 export class BlogService {
   blogs: Blog[];
+  hightlights: Blog[];
   blog$: Observable<Blog[]>;
 
   constructor(private db: AngularFireDatabase ) {
@@ -27,13 +28,17 @@ export class BlogService {
         //.filter(subMenuKey => subMenuKey.name.toLowerCase() === 'join us').$ref;
         dbRef.once('value')
             .then((snapshot) => {
-              let tmp: string[] = [];
+              let tmp: string[] = [], ontop: string[] = [];
               snapshot.forEach(function(childSnapshot){
                   let item = childSnapshot.val();
                   if (item.enable) {
-                    tmp.push(childSnapshot.val());
+                    if (item.ontop)
+                      ontop.push(childSnapshot.val());
+                    else
+                      tmp.push(childSnapshot.val());
                   }
               });
+              this.hightlights = Object.keys(ontop).map(key => ontop[key]);
               this.blogs = Object.keys(tmp).map(key => tmp[key]);
             });
     }

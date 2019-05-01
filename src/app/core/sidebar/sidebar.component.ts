@@ -26,7 +26,6 @@ import { Menu, Blog } from '../models';
 })
 export class SideBarComponent implements OnInit {
   constructor(private blogSVC: BlogService, private route: ActivatedRoute, private router: Router, public envSvc: EnvService, private sanitizer: DomSanitizer) {}
-
   public ngOnInit() {
     this.blogSVC.setBlog();
   }
