@@ -4,7 +4,7 @@
       <h4 class="widget-title widgettitle">WELCOME TO OUTREACH</h4>
       <article>
         <div *ngFor="let blog of blogSVC.hightlights">
-        <a href="#" class="alignnone" aria-hidden="true">
+            <a class="alignnone"  aria-hidden="true" (click)="changeRoute(blog)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: false}">
           <img
             width="300"
             height="150"
@@ -15,14 +15,15 @@
         </a>
         <header class="entry-header">
           <h2 class="entry-title" itemprop="headline">
-            <a href="#">{{blog.title}}</a>
+              <a (click)="changeRoute(blog)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: false}">
+                  {{blog.title}}</a>
           </h2>
           <p class="entry-meta">
             <time
               class="entry-time"
               itemprop="datePublished"
-              datetime="2013-08-04T22:21:46+00:00"
-              >August 4, 2013</time
+              datetime="{blog.modifiedDate}}"
+              >{{blog.modifiedDate | date: 'MMMM d, yyyy'}}</time
             >
             By
             <span
@@ -30,31 +31,20 @@
               itemprop="author"
               itemscope
               itemtype="https://schema.org/Person"
-              ><a
-                href="https://demo.studiopress.com/outreach/author/lmancke/"
-                class="entry-author-link"
-                itemprop="url"
-                rel="author"
-                ><span class="entry-author-name" itemprop="name"
-                  >Lauren Mancke</span
+              ><a class="entry-author-link" (click)="changeRoute(blog)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: false}">
+              <span class="entry-author-name" itemprop="name"
+                  >{{blog.author}}</span
                 ></a
               ></span
             >
-            <span class="entry-comments-link"
-              ><a
-                href="https://demo.studiopress.com/outreach/sample-message-1/#respond"
-                >Leave a Comment</a
-              ></span
-            >
+            <!-- <span class="entry-comments-link"><a href="#" >Leave a Comment</a></span> -->
           </p>
         </header>
         <div class="entry-content">
           <p>
-            Join us for the first message in our new weekend series.
-            <a
-              href="https://demo.studiopress.com/outreach/sample-message-1/#more-487"
-              class="more-link"
-              >Read More</a
+              {{blog.content.substring(0, 0)}}
+              <a class="more-link" (click)="changeRoute(blog)" routerLinkActive="active" [routerLinkActiveOptions]= "{exact: false}">
+                Read More</a
             >
           </p>
         </div>
