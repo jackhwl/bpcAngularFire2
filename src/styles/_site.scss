@@ -12,6 +12,13 @@ body {
     line-height: 1.625;
     margin: 0;
 }
+table {
+  border-collapse: collapse;
+}
+table, td {
+	border: 1px solid #ccc;
+	font-size: 12px;
+}
 .site-header {
     background-color: #589b37;
     color: #fff;
@@ -400,7 +407,7 @@ input, select, textarea {
 .admin-content a {
     color: #6ab446;
     margin: 0 10px;
-} 
+}
 
 .admin-content form {
     margin: 0 10px;
