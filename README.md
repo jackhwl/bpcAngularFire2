@@ -1,6 +1,9 @@
 bpc website use angularFire2 4.0
 test publick key again
 use node 8.13 version to avoid sass issue(in node 10)
+template from:
+https://demo.studiopress.com/outreach/
+
 https://imagecompressor.com/
 
 https://peterscene.com/detecting-touch-devices-2018-update/
@@ -33,6 +36,7 @@ http://www.stucox.com/blog/the-good-and-bad-of-level-4-media-queries/
     <img  alt="Tipe" src="https://user-images.githubusercontent.com/1016365/30999155-30430eb8-a488-11e7-850e-a7c38dad77c1.png" class="img-responsive">
   </a>
 </p>
+
 
 
 browser-sync start --server --directory --port "8070" --ui-port "9090"

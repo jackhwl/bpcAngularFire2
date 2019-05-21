@@ -51,6 +51,7 @@ export class BlogDetailComponent implements OnInit, OnChanges {
                 let content = transform[0].content;
                 let imgTitle = transform[0].imgTitle;
                 let img = transform[0].img;
+                let ontop = transform[0].ontop;
                 let author = transform[0].author;
                 let enable = transform[0].enable;
                 let order = transform[0].order;
@@ -59,7 +60,7 @@ export class BlogDetailComponent implements OnInit, OnChanges {
 
                 this.singlePost = {
                   title,
-                   content, imgTitle, img, author, order, enable, createDate, modifiedDate
+                   content, imgTitle, img, ontop, author, order, enable, createDate, modifiedDate
                 };
 
             })
